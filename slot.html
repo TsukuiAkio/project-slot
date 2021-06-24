@@ -1,0 +1,2619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body oncontextmenu="return false;" ontouchmove="event.preventDefault()" style="overflow-x:hidden;">
+  <!-- Android端末で長押しした時に「画像を保存」等のメニューを表示させないための処理 -->
+  <!-- 横スクロール禁止 -->
+
+  <!-- Let's Go!ランプ(先読み込み用) -->
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: -600px; top: 232px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="letsa.gif" style="width: 100px; height: 85px;">
+  </div>
+
+  <!-- キャンバスレイヤー -->
+  <canvas id="canvas1" width="540" height="540" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 0px; top: 0px; -moz-user-select: none; -khtml-user-select: none; user-select: none;"></canvas>
+
+  <!-- リール影 -->
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 20px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 2px; opacity: 0.5;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 22px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 4px; opacity: 0.3;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 26px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 6px; opacity: 0.2;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 32px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 8px; opacity: 0.15;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 40px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 10px; opacity: 0.08;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 20px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 2px; opacity: 0.5;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 22px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 4px; opacity: 0.3;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 26px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 6px; opacity: 0.2;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 32px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 8px; opacity: 0.15;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 40px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 10px; opacity: 0.08;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 20px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 2px; opacity: 0.5;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 22px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 4px; opacity: 0.3;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 26px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 6px; opacity: 0.2;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 32px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 8px; opacity: 0.15;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 40px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 10px; opacity: 0.08;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 228px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 2px; opacity: 0.5;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 224px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 4px; opacity: 0.3;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 218px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 6px; opacity: 0.2;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 210px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 8px; opacity: 0.15;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 200px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 10px; opacity: 0.08;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 228px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 2px; opacity: 0.5;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 224px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 4px; opacity: 0.3;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 218px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 6px; opacity: 0.2;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 210px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 8px; opacity: 0.15;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 200px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 10px; opacity: 0.08;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 228px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 2px; opacity: 0.5;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 224px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 4px; opacity: 0.3;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 218px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 6px; opacity: 0.2;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 210px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 8px; opacity: 0.15;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 200px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="blank.gif" style="width: 148px; height: 10px; opacity: 0.08;">
+  </div>
+
+  <!-- 当たりライト -->
+  <div id="div_ligit1" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 85px; top: 115px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="light1.gif" id="img_light1" style="width: 370px; opacity: 0;">
+  </div>
+  <div id="div_ligit2" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 85px; top: 55px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="light1.gif" id="img_light2" style="width: 370px; opacity: 0;">
+  </div>
+  <div id="div_ligit3" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 85px; top: 175px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="light1.gif" id="img_light3" style="width: 370px; opacity: 0;">
+  </div>
+  <div id="div_ligit4" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 85px; top: 55px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="light2.gif" id="img_light4" style="width: 370px; height: 140px; opacity: 0;">
+  </div>
+  <div id="div_ligit5" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 85px; top: 55px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="light3.gif" id="img_light5" style="width: 370px; height: 144px; opacity: 0;">
+  </div>
+
+  <!-- Let's Go!ランプ -->
+  <div id="div_lets" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 20px; top: 232px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="lets.gif" id="img_lets" style="width: 100px; height: 85px;">
+  </div>
+
+  <!-- ボーナス時パネル -->
+  <div id="div_panel_big" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 0px; top: 400px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="panel_big.jpg" id="panel_big" style="width: 540px; height: 140px; opacity: 0;">
+  </div>
+  <div id="div_panel_regular" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 0px; top: 400px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <img src="panel_regular.jpg" id="panel_regular" style="width: 540px; height: 140px; opacity: 0;">
+  </div>
+
+  <!-- マルチプロセス用 -->
+  <div id="div_multi" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 0px; top: 400px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="multi.gif" id="multi" onmousedown="multiprocess();" onmouseup="multiprocessup();"
+      onmouseout="multiprocessup();" ontouchstart="multiprocess();" style="width: 540px; height: 140px;">
+  </div>
+  <div id="div_multi" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 0px; top: 230px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="multi.gif" id="multi" onmousedown="multiprocess();" onmouseup="multiprocessup();"
+      onmouseout="multiprocessup();" ontouchstart="multiprocess();" style="width: 540px; height: 86px;">
+  </div>
+
+  <!-- リールタッチ用 -->
+  <div id="div_rtouch0" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 25px; top: 20px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="multi.gif" id="rtouch0" onmousedown="button0();" onmouseup="button0up();"
+      onmouseout="button0up();" ontouchstart="button0();" style="width: 148px; height: 210px;">
+  </div>
+  <div id="div_rtouch1" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 195px; top: 20px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="multi.gif" id="rtouch1" onmousedown="button1();" onmouseup="button1up();"
+      onmouseout="button1up();" ontouchstart="button1();" style="width: 148px; height: 210px;">
+  </div>
+  <div id="div_rtouch2" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 365px; top: 20px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="multi.gif" id="rtouch2" onmousedown="button2();" onmouseup="button2up();"
+      onmouseout="button2up();" ontouchstart="button2();" style="width: 148px; height: 210px;">
+  </div>
+
+  <!-- レバー -->
+  <div id="div_lever" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 20px; top: 320px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="lever.gif" id="lever" onmousedown="lever();" onmouseup="leverup();" onmouseout="leverup();"
+      ontouchstart="lever();" style="width: 80px;">
+  </div>
+
+  <!-- ボタン -->
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 130px; top: 320px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="button.gif" id="button0" onmousedown="button0();" onmouseup="button0up();"
+      onmouseout="button0up();" ontouchstart="button0();" style="width: 80px;">
+  </div>
+
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 225px; top: 320px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="button.gif" id="button1" onmousedown="button1();" onmouseup="button1up();"
+      onmouseout="button1up();" ontouchstart="button1();" style="width: 80px;">
+  </div>
+
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 320px; top: 320px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="button.gif" id="button2" onmousedown="button2();" onmouseup="button2up();"
+      onmouseout="button2up();" ontouchstart="button2();" style="width: 80px;">
+  </div>
+
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 430px; top: 320px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="b.jpg" id="bet" onmousedown="bet();" onmouseup="betup();" onmouseout="betup();"
+      ontouchstart="bet();" style="width: 80px;">
+  </div>
+
+  <!-- カウンター類 -->
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 160px; top: 255px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="l_credits.gif" style="height: 10px;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 160px; top: 267px; -moz-user-select: none; -khtml-user-select: none; user-select: none; border: solid 1px #888888;">
+    <img id="c0" src="blank.gif" style="height: 30px;"><img id="c1" src="blank.gif" style="height: 30px;"><img id="c2"
+      src="blank.gif" style="height: 30px;"><img id="c3" src="blank.gif" style="height: 30px;"><img id="c4" src="5.gif"
+      style="height: 30px;"><img id="c5" src="0.gif" style="height: 30px;">
+  </div>
+
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 330px; top: 245px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="l_bonus.gif" style="height: 20px;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 330px; top: 267px; -moz-user-select: none; -khtml-user-select: none; user-select: none; border: solid 1px #888888;">
+    <img id="bt" src="blank.gif" style="height: 30px;"><img id="b0" src="blank.gif" style="height: 30px;"><img id="b1"
+      src="blank.gif" style="height: 30px;"><img id="b2" src="blank.gif" style="height: 30px;">
+  </div>
+
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 465px; top: 245px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="l_paid.gif" style="height: 20px;">
+  </div>
+  <div onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 465px; top: 267px; -moz-user-select: none; -khtml-user-select: none; user-select: none; border: solid 1px #888888;">
+    <img id="w0" src="blank.gif" style="height: 30px;"><img id="w1" src="blank.gif" style="height: 30px;">
+  </div>
+
+  <!-- 情報ボタン -->
+  <div id="div_infobutton" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: 460px; top: 472px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="infobutton.gif" id="lever" onmousedown="i_open();" ontouchstart="i_open();"
+      style="width: 60px;">
+  </div>
+
+  <!-- 情報パネル用 -->
+  <div id="div_info" onSelectStart="return false;" onMouseDown="return false;"
+    style="background-color: #ffffff; padding: 8px; position: absolute; left: -600px; top: 0px; width: 440px; height: 520px; line-height: 1.2; border: solid 2px #888888; -moz-user-select: none; -khtml-user-select: none; user-select: none; -webkit-text-size-adjust: 100%; opacity: 0.9;">
+    <p style="margin-top: 0px; margin-bottom: 8px; line-height: 1;">【JavaScriptパチスロ 情報＆設定パネル】</p>
+    <span style="font-size: 70%;">遊び方:
+      BETボタンでCREDIT投入、レバーでリール回転開始、3つのストップボタンでリールをストップさせて、横一列もしくは対角線上に絵柄が揃えば当選分がCREDITに追加されます。<br>
+      ※画面下の部分をクリックまたはタップすることで、一連の動作を順番に行えます。</span>
+    <img src="inst.jpg" style="margin-top: 8px; margin-bottom: 10px;"><br>
+    総ゲーム数: <span id="d_games">0</span>　ボーナス間: <span id="d_bgames">0</span>　総メダル数: <span id="d_medals">0</span><br>
+    BB数: <span id="d_bb">0</span>　RB数: <span id="d_rb">0</span>　合成確率: <span id="d_bratio">-</span><br>
+    <div style="margin-top: 8px; margin-bottom: 4px; line-height: 1.0;">
+      ---------- ボーナス履歴 ----------<br>
+      <span id="d_bhistory"></span>
+      --------------------------------<br>
+    </div>
+    設定: <input type="radio" name="settei" value="1" onChange="setteiHenko()">1 <input type="radio" name="settei"
+      value="2" onChange="setteiHenko()">2 <input type="radio" name="settei" value="3" onChange="setteiHenko()">3 <input
+      type="radio" name="settei" value="4" onChange="setteiHenko()" checked>4 <input type="radio" name="settei"
+      value="5" onChange="setteiHenko()">5 <input type="radio" name="settei" value="6" onChange="setteiHenko()">6 <input
+      type="radio" name="settei" value="10" onChange="setteiHenko()">爆裂<br>
+    ウエイト: <input type="radio" name="wait" value="0" onChange="waitHenko()" checked>なし <input type="radio" name="wait"
+      value="1" onChange="waitHenko()">あり<br>
+    フラグ表示: <input type="radio" name="flag" value="0" onChange="flagHenko()" checked>なし <input type="radio" name="flag"
+      value="1" onChange="flagHenko()">あり<br>
+    サウンド: <input type="radio" name="sound" value="0" onChange="soundHenko()">なし <input type="radio" name="sound"
+      value="1" onChange="soundHenko()" checked>あり<br>
+  </div>
+  <div id="div_close" onSelectStart="return false;" onMouseDown="return false;"
+    style="position: absolute; left: -600px; top: 10px; -moz-user-select: none; -khtml-user-select: none; user-select: none;">
+    <input type="image" src="close.gif" id="lever" onmousedown="i_close();" ontouchstart="i_close();"
+      style="width: 20px;">
+  </div>
+
+  <!-- フラグ表示 -->
+  <div id="div_flag" style="position: absolute; left: -600px; top: 620px;">
+    フラグ: <span id="checker0"></span>
+  </div>
+
+  <!-- クレジット -->
+  <div id="div_google_ads"
+    style="position: absolute; left: 0px; top: 640px; width: 540; text-align: center; -moz-user-select: none; -khtml-user-select: none; user-select: none; -webkit-text-size-adjust: 100%;">
+    Copyright(C) 2016 <a href="//kunisan.jp/" target="_blank">KUNISAN.JP</a>. All Rights Reserved
+  </div>
+
+  <script>
+    //変数初期設定
+    var screenstatus = 0; //0-トップ画面, 1-ゲーム画面, 2-ゲームオーバー画面
+    var canvas; //キャンバス
+    var ctx; //キャンバス
+    var reel_image = []; //リール画像
+    var reel_imageb = []; //リール縦ブレ画像
+    var reel_ini = []; //リールオブジェクトプロトタイプ設定用
+    var reel = []; //リールオブジェクト
+    var reel_speed = 20; //リール移動一コマ当たりのピクセル数
+    var reel_freq = 13; //リール一コマ当たりのミリ秒
+    var timerId = []; //タイマーID
+    var moving = 0; //動作リール数
+    var irre = 0; //イレギュラー順番
+    var betting = 0; //投入枚数
+    var mp = 0; //マルチプロセス処理用
+    var backimg; //バックグラウンドイメージ用
+    var credit = 50; //コイン数
+    var counter_run = 0; //カウンター動作中か
+    var settei_data = []; //設定データオブジェクト
+    var settei = 4; //★設定(1～6通常設定、10爆裂)
+    var wait_on = 0; //★ウエイト設定(0ウエイト無し、1ウエイト有り)
+    var wait_status = 0; //ウエイト状態(0ウエイトしていない、1ウエイト期間中、2リール回転前ウエイト)
+    var bonus_flag = 0; //ボーナスフラグ 1-ビッグ 2-レギュラー
+    var bonus_counter = 0; //ボーナスカウンター
+    var bonus_flash = 0; //ボーナスフラッシュ用
+    var p_timerId = 0; //ボーナスパネル用タイマー
+    var a_light = []; //当たりライト用
+    var a_timerId = []; //当たりライト用タイマー
+    var games = 0; //総ゲーム数
+    var bgames = 0; //ボーナス間ゲーム数
+    var medals = 0; //総メダル数
+    var bb = 0; //ビッグボーナス数
+    var rb = 0; //レギュラーボーナス数
+    var bgames_history = []; //ボーナス間履歴
+    var btype_history = []; //ボーナス種類履歴
+    var audio_status = 1; //オーディオオン・オフ(0-オフ,1-オン)
+    var bet_sound = 0; //BETサウンド順番
+    var pay_sound = 0; //支払いサウンド順番
+    var peka_sound = 0; //ペカリサウンドフラグ
+    var history_bar = ['□', '□□', '□□□', '□□□□', '□□□□□', '□□□□□□', '□□□□□□□', '□□□□□□□□', '□□□□□□□□□', '□□□□□□□□□□', '□□□□□□□□□■']; //履歴用バー
+    var flag = 0; //★フラグ 0-ハズレ,1-リプレイ,2-ぶどう,3-ベル,4-太鼓,6-チェリー,50-ぶどう＋チェリー,100-ビッグボーナス,200-レギュラーボーナス (複合役: ビッグボーナス+リプレイ = 1+100 = 101)
+    //var hit = 0; //当たり判定 0-ハズレ,1-リプレイ,2-ぶどう,3-ベル,4-太鼓,6-チェリー,100-ビッグボーナス, 200-レギュラーボーナス
+    var hit_data = []; //当たりデータ(0 リプレイ, 3 ぶどう, 12 ベル, 49 太鼓, 300 ビッグボーナス, 399 レギュラーボーナス, 6000台 連チェリー, 4000台 単チェリー)
+
+    var audio_files = ['fanfare.mp3', 'big.mp3', 'reg.mp3', 'bigend.mp3', , , , , , , 'roll.wav', 'stop.wav', 'stop.wav', 'stop.wav', 'bet.wav', 'bet.wav', 'bet.wav', 'pay.wav', 'pay.wav', 'pay.wav', 'pay.wav', 'pay.wav', 'pay.wav', 'pay.wav', 'pay.wav', 'pay.wav', 'pay.wav', 'replay.mp3', 'wait.mp3', 'peka.mp3']; //オーディオファイル名一覧(0-ファンファーレ,10-回転開始,11-13-ストップ,14-16-BET,17-26-支払い,27-リプレイ,28-ウエイト,29-ペカリ)
+    var audio = []; //オーディオ用配列
+    for (i = 0; i < audio_files.length; i++) { //全体の音量調整
+      audio[i] = new Audio(audio_files[i]);
+      audio[i].volume = 1;
+    }
+    audio[1].volume = 0.6; //ビッグBGM小さく設定
+    audio[2].volume = 0.6; //レギュラーBGM小さく設定
+    audio[3].volume = 0.7; //ビッグBGM終了小さく設定
+    for (i = 14; i <= 16; i++) { //BET音小さく調整
+      audio[i].volume = 0.5;
+    }
+    for (i = 17; i <= 26; i++) { //支払い音小さく調整
+      audio[i].volume = 0.5;
+    }
+    hit_data[0] = {
+      name: 'リプレイ', //役名
+      hit: 1, //役番号
+      replay: 1, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 0, //通常時獲得メダル数
+      bget: 0 //ボーナス時獲得メダル数
+    }
+    hit_data[3] = {
+      name: 'ぶどう', //役名
+      hit: 2, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 7, //通常時獲得メダル数
+      bget: 14 //ボーナス時獲得メダル数
+    }
+    hit_data[12] = {
+      name: 'ベル', //役名
+      hit: 3, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 14, //通常時獲得メダル数
+      bget: 14 //ボーナス時獲得メダル数
+    }
+    hit_data[49] = {
+      name: '太鼓', //役名 
+      hit: 4, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 10, //通常時獲得メダル数
+      bget: 14 //ボーナス時獲得メダル数
+    }
+    hit_data[300] = {
+      name: 'ビッグボーナス', //役名
+      hit: 100, //役番号
+      replay: 0, //リプレイ
+      bonus: 1, //ボーナス種類
+      get: 0, //通常時獲得メダル数
+      bget: 0 //ボーナス時獲得メダル数
+    }
+    hit_data[600] = {
+      name: 'レギュラーボーナス', //役名
+      hit: 200, //役番号
+      replay: 0, //リプレイ
+      bonus: 2, //ボーナス種類
+      get: 0, //通常時獲得メダル数
+      bget: 0 //ボーナス時獲得メダル数
+    }
+    hit_data[4000] = {
+      name: 'チェリー', //役名
+      hit: 5, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 1, //通常時獲得メダル数
+      bget: 14 //ボーナス時獲得メダル数
+    }
+    hit_data[5000] = { //チェリー4000＋BAR700＋BAR400だと5100になるため。
+      name: 'チェリー', //役名
+      hit: 5, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 1, //通常時獲得メダル数
+      bget: 14 //ボーナス時獲得メダル数
+    }
+    hit_data[6000] = {
+      name: 'チェリー', //役名
+      hit: 6, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 1, //通常時獲得メダル数
+      bget: 14 //ボーナス時獲得メダル数
+    }
+    hit_data[900] = {
+      name: 'リーチ目(B絵柄並び)', //役名
+      hit: 999, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 0, //通常時獲得メダル数
+      bget: 0 //ボーナス時獲得メダル数
+    }
+    hit_data[1200] = {
+      name: 'リーチ目(B絵柄並び)', //役名
+      hit: 999, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 0, //通常時獲得メダル数
+      bget: 0 //ボーナス時獲得メダル数
+    }
+    hit_data[1500] = {
+      name: 'リーチ目(B絵柄並び)', //役名
+      hit: 999, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 0, //通常時獲得メダル数
+      bget: 0 //ボーナス時獲得メダル数
+    }
+    hit_data[1800] = {
+      name: 'リーチ目(B絵柄並び)', //役名
+      hit: 999, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 0, //通常時獲得メダル数
+      bget: 0 //ボーナス時獲得メダル数
+    }
+    hit_data[132] = {
+      name: 'リーチ目(太鼓＋B絵柄並び)', //役名
+      hit: 999, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 0, //通常時獲得メダル数
+      bget: 0 //ボーナス時獲得メダル数
+    }
+    hit_data[732] = {
+      name: 'リーチ目(太鼓＋B絵柄並び)', //役名
+      hit: 999, //役番号
+      replay: 0, //リプレイ
+      bonus: 0, //ボーナス種類
+      get: 0, //通常時獲得メダル数
+      bget: 0 //ボーナス時獲得メダル数
+    }
+
+    //各設定データ
+    settei_data[1] = { //設定1
+      r: [13698, 29106, 29197, 29288, 32266, 32266, 32613, 32832]
+    }
+    settei_data[2] = { //設定2
+      r: [13698, 29106, 29197, 29288, 32266, 32266, 32620, 32845]
+    }
+    settei_data[3] = { //設定3
+      r: [13698, 29106, 29197, 29288, 32284, 32284, 32638, 32924]
+    }
+    settei_data[4] = { //設定4
+      r: [13698, 29106, 29197, 29288, 32297, 32297, 32663, 32974]
+    }
+    settei_data[5] = { //設定5
+      r: [13698, 29106, 29197, 29288, 32315, 32315, 32681, 33053]
+    }
+    settei_data[6] = { //設定6
+      r: [13698, 29879, 29970, 30061, 33088, 33088, 33460, 33832]
+    }
+    settei_data[10] = { //爆裂(テスト用)
+      r: [13698, 29879, 29970, 30061, 33088, 33088, 36421, 39754]
+    }
+    settei_data[100] = { //ビッグボーナス中
+      r: [0, 97087, 97170, 97253, 100000, 100000, 100000, 100000]
+    }
+    settei_data[200] = { //レギュラーボーナス中
+      r: [0, 0, 0, 0, 0, 100000, 100000, 100000]
+    }
+
+    //キャンバス初期設定
+    canvas = document.getElementById('canvas1');
+    ctx = canvas.getContext('2d');
+    ctx.strokeStyle = '#000000';
+    ctx.fillStyle = '#000000';
+    ctx.lineWidth = 1;
+    ctx.lineCap = 'butt';
+    //ctx.globalCompositeOperation = 'destination-out'; //透明処理
+    ctx.fillRect(0, 0, 539, 539);
+    //ctx.globalCompositeOperation = 'source-over'; //透明処理解除
+    backimg = new Image(); //背景画像定義
+    backimg.src = 'background.jpg';
+    backimg.onload = function () {
+      ctx.drawImage(backimg, 0, 0, 540, 540, 0, 0, 540, 540);
+      //リール画像設定
+      for (i = 0; i <= 2; i++) {
+        reel_image[i] = new Image(); //リール画像定義
+        reel_image[i].src = 'reel' + i + '.jpg';
+        reel_imageb[i] = new Image(); //リール縦ブレ画像定義
+        reel_imageb[i].src = 'reel' + i + 'b.jpg';
+        reel_ini[i] = new ReelObj(i);
+        //setTimeout(reel_display,1000,i); //画像読み込みが完了しないと表示できないので、1秒遅らせて表示を行う。
+      }
+      Reel0Obj.prototype = reel_ini[0];
+      reel[0] = new Reel0Obj();
+
+      Reel1Obj.prototype = reel_ini[1];
+      reel[1] = new Reel1Obj();
+
+      Reel2Obj.prototype = reel_ini[2];
+      reel[2] = new Reel2Obj();
+
+      reel_image[0].onload = function () { //for文の中でメソッドを実行すると何故かエラーが出るため、分けて実行
+        reel[0].display();
+      }
+      reel_image[1].onload = function () {
+        reel[1].display();
+      }
+      reel_image[2].onload = function () {
+        reel[2].display();
+      }
+    }
+
+    //初期画面
+    credits_display(); //クレジットカウンター用
+    setInterval(infopanel, 500); //情報パネル用
+    setInterval(infohistory, 512); //ボーナス履歴グラフ用
+    setInterval(checker, 323); //フラグ表示用
+
+    //リールコンストラクタ
+    function ReelObj(_reelnum) {
+      this.reelnum = _reelnum; //リール番号 0-左、1-中、2-右
+      //リール情報
+      switch (this.reelnum) {
+        case 0:
+          this.reeldata = [700, 1, 0, 1, 4, 700, 0, 1, 0, 1, 100, 4000, 1, 0, 1, 100, 16, 1, 0, 1, 4000, 700, 1, 0, 1, 4];
+          this.y = 525;
+          break;
+        case 1:
+          this.reeldata = [0, 4, 1, 2000, 0, 100, 1, 2000, 0, 17, 1, 2000, 0, 700, 1, 2000, 4, 0, 100, 1, 2000, 0, 4, 1, 2000, 0];
+          this.y = 225;
+          break;
+        case 2:
+          this.reeldata = [1, 16, 4, 0, 1, 400, 100, 4, 0, 1, 16, 4, 0, 1, 16, 4, 0, 1, 16, 4, 0, 1, 16, 4, 0, 1];
+          this.y = 285;
+          break;
+      }
+      this.status = 0; //リール状態 0-停止、1～99停止待ち、100回転中
+      this.reel_image = reel_image[this.reelnum]; //リール画像定義
+      this.reel_imageb = reel_imageb[this.reelnum]; //リール縦ブレ画像定義
+      this.x = 170 * this.reelnum + 25;
+      ctx.drawImage(this.reel_image, 0, Math.floor(this.y), 148, 210, this.x, 20, 148, 210);
+
+      this.display = function () { //リール表示メソッド
+        ctx.drawImage(this.reel_image, 0, Math.floor(this.y), 148, 210, this.x, 20, 148, 210);
+      }
+
+      this.visibleData = function (yup) { //リール盤面表示メソッド
+        if (yup != null) {
+          var yuppic = yup * 60; //いくつ上のピクセルから表示するか
+        } else {
+          var yuppic = 0;
+        }
+
+        if (this.y - yuppic <= 45) {
+          yuppic -= 1260;
+        }
+        return [(this.reeldata[Math.floor((this.y - yuppic + 15) / 60)]), (this.reeldata[Math.floor((this.y - yuppic + 15) / 60) + 1]), (this.reeldata[Math.floor((this.y - yuppic + 15) / 60) + 2])];
+      }
+
+    }
+
+    //左リール回転用コンストラクタ
+    function Reel0Obj() {
+      this.roll0 = function () { //リール回転メソッド		
+        this.y -= reel_speed;
+        if (this.y <= 45) {
+          this.y = 1305;
+        }
+        ctx.drawImage(this.reel_imageb, 0, Math.floor(this.y), 148, 210, this.x, 20, 148, 210);
+        if (this.status < 100) { //ストップの指示入った場合
+          if (((this.y - 45) % 60) == 20) {
+            switch (moving) {
+              case 0.5: //ストップリール数が2の場合
+                switch (flag) {
+                  case 0: //はずれの場合
+                    if (hit_check(0, 0, 0)[2] == 9999) {
+                      this.status = 1;
+                    }
+                    break;
+                  case 1: //リプレイの場合
+                  case 101:
+                  case 201:
+                    if ((hit_check(0, 0, 0)[2] == 9999) || ((hit_check(0, 0, 0)[2] == 1) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000))) { //はずれまたはリプレイありでチェリーない場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 2: //ぶどうの場合
+                  case 102:
+                  case 202:
+                    if ((hit_check(0, 0, 0)[2] == 9999) || ((hit_check(0, 0, 0)[2] == 2) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000))) { //はずれまたはぶどうありでチェリーない場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 3: //ベルの場合
+                  case 103:
+                  case 203:
+                    if ((hit_check(0, 0, 0)[2] == 9999) || ((hit_check(0, 0, 0)[2] == 3) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000))) { //はずれまたはベルありでチェリーない場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 4: //太鼓の場合
+                  case 104:
+                  case 204:
+                    if ((hit_check(0, 0, 0)[2] == 9999) || ((hit_check(0, 0, 0)[2] == 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000))) { //はずれまたは太鼓ありでチェリーない場合
+                      this.status = 1;
+                    }
+                    break;
+                    break;
+                  case 6: //連チェリーの場合
+                    if ((hit_check(0, 0, 0)[0] == 'チェリー') || (hit_check(0, 0, 0)[0] == 'チェリーチェリー')) { //左上にチェリーある場合
+                      this.status = 1;
+                    }
+                    if ((hit_check(0, 0, 0)[2] == 9999) && (this.status <= 3)) { //2マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 50: //ぶどう＋チェリー
+                    if ((hit_check(0, 0, 0)[2] == 9999) || (hit_check(0, 0, 0)[2] == 2)) { //はずれまたはぶどうの場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 100: //ボーナスチェリー無しの場合
+                  case 200:
+                    if ((hit_check(0, 0, 0)[2] == 999) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //リーチ目でチェリー無い場合ストップ
+                      this.status = 1;
+                    }
+                    if (hit_check(0, 0, 0)[2] == 9999) { //子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 106: //ボーナスチェリー有りの場合
+                  case 206:
+                    if (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000) { //リーチ目の場合ストップ
+                      this.status = 1;
+                    }
+                    if (hit_check(0, 0, 0)[2] == 9999) { //子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if ((hit_check(0, 0, 0)[0] == 'チェリーチェリー') || (hit_check(0, 0, 0)[0] == 'チェリー')) { //チェリーで他に子役無い場合ストップ
+                      this.status = 1;
+                    }
+                    break;
+                }
+                break;
+              case 1.5: //ストップリール数が1の場合
+                if (reel[1].status == 0) { //中リールストップの場合
+                  switch (flag) {
+                    case 0: //はずれの場合
+                      if (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000) { //チェリーが無い場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 1: //リプレイの場合
+                    case 101:
+                    case 201:
+                      if ((reel[1].visibleData()[0] == 0) && (this.visibleData()[0] == 0) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中上にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 0) && ((this.visibleData()[0] == 0) || (this.visibleData()[1] == 0) || (this.visibleData()[2] == 0)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中中にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 0) && (this.visibleData()[2] == 0) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中下にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 2: //ぶどうの場合
+                    case 102:
+                    case 202:
+                      if ((reel[1].visibleData()[0] == 1) && (this.visibleData()[0] == 1) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中上にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 1) && ((this.visibleData()[0] == 1) || (this.visibleData()[1] == 1) || (this.visibleData()[2] == 1)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中中にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 1) && (this.visibleData()[2] == 1) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中下にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 3: //ベルの場合
+                    case 103:
+                    case 203:
+                      if ((reel[1].visibleData()[0] == 4) && (this.visibleData()[0] == 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中上にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 4) && ((this.visibleData()[0] == 4) || (this.visibleData()[1] == 4) || (this.visibleData()[2] == 4)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中中にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 4) && (this.visibleData()[2] == 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中下にベルある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 4: //太鼓の場合
+                    case 104:
+                    case 204:
+                      if ((reel[1].visibleData()[0] == 17) && (this.visibleData()[0] == 16) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中上に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 17) && ((this.visibleData()[0] == 16) || (this.visibleData()[1] == 16) || (this.visibleData()[2] == 16)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中中に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 17) && (this.visibleData()[2] == 16) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中下に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 6: //連チェリーの場合
+                      if ((this.visibleData()[0] == 4000) || (this.visibleData()[2] == 4000)) {
+                        this.status = 1;
+                      }
+                      break;
+                    case 50: //ぶどう+チェリーの場合
+                      if ((reel[1].visibleData()[0] == 1) && (this.visibleData()[0] == 1)) { //中上にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 1) && ((this.visibleData()[0] == 1) || (this.visibleData()[1] == 1) || (this.visibleData()[2] == 1))) { //中中にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 1) && (this.visibleData()[2] == 1)) { //中下にぶどうある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 100: //ボーナス(チェリー無し)
+                    case 200:
+                      if (((reel[1].visibleData()[0] == 100) || (reel[1].visibleData()[0] == 700)) && ((this.visibleData()[0] == 100) || (this.visibleData()[0] == 400)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中上にボーナスある場合
+                        this.status = 1;
+                      }
+                      if (((reel[1].visibleData()[0] == 100) || (reel[1].visibleData()[0] == 700)) && ((this.visibleData()[0] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 400) || (this.visibleData()[1] == 400) || (this.visibleData()[2] == 400)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中中にボーナスある場合
+                        this.status = 1;
+                      }
+                      if (((reel[1].visibleData()[0] == 100) || (reel[1].visibleData()[0] == 700)) && ((this.visibleData()[0] == 100) || (this.visibleData()[0] == 400)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //中下にボーナスある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 106:　//ボーナス(＋チェリーあり)
+                    case 206:
+                      if (((reel[1].visibleData()[0] == 100) || (reel[1].visibleData()[0] == 700)) && ((this.visibleData()[0] == 100) || (this.visibleData()[0] == 400))) { //中上にボーナスある場合
+                        this.status = 1;
+                      }
+                      if (((reel[1].visibleData()[0] == 100) || (reel[1].visibleData()[0] == 700)) && ((this.visibleData()[0] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 400) || (this.visibleData()[1] == 400) || (this.visibleData()[2] == 400))) { //中中にボーナスある場合
+                        this.status = 1;
+                      }
+                      if (((reel[1].visibleData()[0] == 100) || (reel[1].visibleData()[0] == 700)) && ((this.visibleData()[0] == 100) || (this.visibleData()[0] == 400))) { //中下にボーナスある場合
+                        this.status = 1;
+                      }
+                      break;
+                  }
+                } else { //右リールストップの場合
+                  switch (flag) {
+                    case 0: //はずれの場合
+                      if (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000) { //チェリーが無い場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 1: //リプレイの場合
+                    case 101:
+                    case 201:
+                      if (((reel[2].visibleData()[0] == 0) || (reel[2].visibleData()[2] == 0)) && ((this.visibleData()[0] == 0) || (this.visibleData()[2] == 0)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右上または右下にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 0) && (this.visibleData()[1] == 0) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右中にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 2: //ぶどうの場合
+                    case 102:
+                    case 202:
+                      if (((reel[2].visibleData()[0] == 1) || (reel[2].visibleData()[2] == 1)) && ((this.visibleData()[0] == 1) || (this.visibleData()[2] == 1)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右上または右下にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 1) && (this.visibleData()[1] == 1) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右中にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 3: //ベルの場合
+                    case 103:
+                    case 203:
+                      if (((reel[2].visibleData()[0] == 4) || (reel[2].visibleData()[2] == 4)) && ((this.visibleData()[0] == 4) || (this.visibleData()[2] == 4)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右上または右下にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 4) && (this.visibleData()[1] == 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右中にベルある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 4: //太鼓の場合
+                    case 104:
+                    case 204:
+                      if (((reel[2].visibleData()[0] == 16) || (reel[2].visibleData()[2] == 16)) && ((this.visibleData()[0] == 16) || (this.visibleData()[2] == 16)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右上または右下に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 16) && (this.visibleData()[1] == 16) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右中に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 6: //連チェリーの場合
+                      if ((this.visibleData()[0] == 4000) || (this.visibleData()[2] == 4000)) {
+                        this.status = 1;
+                      }
+                      break;
+                    case 50: //ぶどう+チェリーの場合
+                      if (((reel[2].visibleData()[0] == 1) || (reel[2].visibleData()[2] == 1)) && ((this.visibleData()[0] == 1) || (this.visibleData()[2] == 1))) { //右上または右下にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 1) && (this.visibleData()[1] == 1)) { //右中にぶどうある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 100: //ビッグボーナス(チェリーなし)
+                      if (((reel[2].visibleData()[0] == 100) || (reel[2].visibleData()[2] == 100)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右上または右下にビッグある場合
+                        this.status = 1;
+                      } else if ((reel[2].visibleData()[1] == 100) && (this.visibleData()[1] == 100) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右中にビッグある場合
+                        this.status = 1;
+                      } else if (((reel[2].visibleData()[0] == 100) || (reel[2].visibleData()[2] == 100) || (reel[2].visibleData()[0] == 400) || (reel[2].visibleData()[2] == 400)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 700) || (this.visibleData()[2] == 700)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右上または右下にボーナスある場合
+                        this.status = 1;
+                      } else if (((reel[2].visibleData()[1] == 100) || (reel[2].visibleData()[1] == 400)) && ((this.visibleData()[1] == 100) || (this.visibleData()[1] == 700)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右中にボーナスある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 106: //ビッグボーナス(チェリーあり)
+                      if (((reel[2].visibleData()[0] == 100) || (reel[2].visibleData()[2] == 100)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100))) { //右上または右下にビッグある場合
+                        this.status = 1;
+                      } else if ((reel[2].visibleData()[1] == 100) && (this.visibleData()[1] == 100)) { //右中にビッグある場合
+                        this.status = 1;
+                      } else if (((reel[2].visibleData()[0] == 100) || (reel[2].visibleData()[2] == 100) || (reel[2].visibleData()[0] == 400) || (reel[2].visibleData()[2] == 400)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 700) || (this.visibleData()[2] == 700))) { //右上または右下にボーナスある場合
+                        this.status = 1;
+                      } else if (((reel[2].visibleData()[1] == 100) || (reel[2].visibleData()[1] == 400)) && ((this.visibleData()[1] == 100) || (this.visibleData()[1] == 700))) { //右中にボーナスある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 200: //レギュラーボーナス(チェリーなし)
+                      if (((reel[2].visibleData()[0] == 400) || (reel[2].visibleData()[2] == 400)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右上または右下にBARある場合
+                        this.status = 1;
+                      } else if ((reel[2].visibleData()[1] == 400) && (this.visibleData()[1] == 100) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右中にBARある場合
+                        this.status = 1;
+                      } else if (((reel[2].visibleData()[0] == 100) || (reel[2].visibleData()[2] == 100) || (reel[2].visibleData()[0] == 400) || (reel[2].visibleData()[2] == 400)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 700) || (this.visibleData()[2] == 700)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右上または右下にボーナスある場合
+                        this.status = 1;
+                      } else if (((reel[2].visibleData()[1] == 100) || (reel[2].visibleData()[1] == 400)) && ((this.visibleData()[1] == 100) || (this.visibleData()[1] == 700)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //右中にボーナスある場合
+                        this.status = 1;
+                      }
+                      if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                        this.status = 1;
+                      }
+                      break;
+                    case 206: //レギュラーボーナス(チェリーあり)
+                      if (((reel[2].visibleData()[0] == 400) || (reel[2].visibleData()[2] == 400)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100))) { //右上または右下にBARある場合
+                        this.status = 1;
+                      } else if ((reel[2].visibleData()[1] == 400) && (this.visibleData()[1] == 100)) { //右中にBARある場合
+                        this.status = 1;
+                      } else if (((reel[2].visibleData()[0] == 100) || (reel[2].visibleData()[2] == 100) || (reel[2].visibleData()[0] == 400) || (reel[2].visibleData()[2] == 400)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 700) || (this.visibleData()[2] == 700))) { //右上または右下にボーナスある場合
+                        this.status = 1;
+                      } else if (((reel[2].visibleData()[1] == 100) || (reel[2].visibleData()[1] == 400)) && ((this.visibleData()[1] == 100) || (this.visibleData()[1] == 700))) { //右中にボーナスある場合
+                        this.status = 1;
+                      }
+                      break;
+                  }
+                }
+                break;
+              case 2.5: //ストップリール数が0の場合
+                switch (flag) {
+                  case 0: //はずれの場合
+                    if (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000) {
+                      this.status = 1;
+                    }
+                    break;
+                  case 1: //リプレイの場合
+                  case 101:
+                  case 201:
+                    if ((this.visibleData()[0] * this.visibleData()[1] * this.visibleData()[2] == 0) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //リプレイがあり、かつチェリーが無い場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 2: //ぶどうの場合
+                  case 102:
+                  case 202:
+                    if (((this.visibleData()[0] == 1) || (this.visibleData()[1] == 1) || (this.visibleData()[2] == 1)) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //ぶどうがあり、かつチェリーが無い場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 3: //ベルの場合
+                  case 103:
+                  case 203:
+                    if ((this.visibleData()[0] == 4) || (this.visibleData()[1] == 4) || (this.visibleData()[2] == 4)) { //ベルがある場合
+                      this.status = 1;
+                    }
+                    if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                      this.status = 1;
+                    }
+                    break;
+                  case 4: //太鼓の場合
+                  case 104:
+                  case 204:
+                    if ((this.visibleData()[0] == 16) || (this.visibleData()[1] == 16) || (this.visibleData()[2] == 16)) { //太鼓がある場合
+                      this.status = 1;
+                    }
+                    if ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 4000)) { //1コマ動き、チェリーが無い場合には止めてしまう。
+                      this.status = 1;
+                    }
+                    break;
+                  case 6: //連チェリーの場合
+                    if ((this.visibleData()[0] == 4000) || (this.visibleData()[2] == 4000)) {
+                      this.status = 1;
+                    }
+                    break;
+                  case 50: //ぶどう＋チェリーの場合
+                    if ((this.visibleData()[0] == 1) || (this.visibleData()[1] == 1) || (this.visibleData()[2] == 1)) { //ぶどうがある場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 106: //ボーナス＋チェリー
+                  case 206:
+                    if ((this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] >= 100) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 5000)) {
+                      this.status = 1;
+                    }
+                    break;
+                  case 100: //ボーナスの場合
+                  case 200:
+                    if ((this.status >= 2) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 1000) && ((this.visibleData(1)[0] == 100) || (this.visibleData(1)[0] == 700))) { //チェリーがなく、1コマ上にボーナス絵柄がある場合には、1マス下にすべらせる。
+                      this.status = 2;
+                    } else if (((this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] >= 100) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 1000)) || ((this.status <= 4) && (this.visibleData()[0] + this.visibleData()[1] + this.visibleData()[2] < 1000))) { //ボーナス絵柄がありチェリーが無い場合、もしくはリールが1コマ滑った後でチェリーが無い場合はは止める
+                      this.status = 1;
+                    }
+                    break;
+                }
+                break;
+            }
+            this.status -= 1;
+
+          } else if ((((this.y - 45) % 60) == 0) && (this.status == 0)) {
+            moving -= 0.5;
+            if (audio_status == 1) {
+              audio[11].play(); //効果音
+            }
+            clearInterval(timerId[this.reelnum]);
+            ctx.drawImage(this.reel_image, 0, Math.floor(this.y), 148, 210, this.x, 20, 148, 210);
+            if (moving == 0) { //リールが全て止まった場合
+              judgement2();
+            }
+          }
+        }
+      }
+    }
+
+    //中リール回転用コンストラクタ
+    function Reel1Obj() {
+      this.roll1 = function () { //リール回転メソッド
+        this.y -= reel_speed;
+        if (this.y <= 45) {
+          this.y = 1305;
+        }
+        ctx.drawImage(this.reel_imageb, 0, Math.floor(this.y), 148, 210, this.x, 20, 148, 210);
+        if (this.status < 100) { //ストップの指示入った場合
+          if (((this.y - 45) % 60) == 20) {
+            switch (moving) {
+              case 0.5: //ストップリール数が2の場合
+                switch (flag) {
+                  case 0: //はずれの場合
+                    if (hit_check(0, 0, 0)[2] == 9999) {
+                      this.status = 1;
+                    }
+                    break;
+                  case 1: //リプレイの場合
+                    if (hit_check(0, 0, 0)[2] == 1) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 101: //リプレイ＋ビッグ
+                    if ((hit_check(0, 0, 0)[2] == 1) || (hit_check(0, 0, 0)[2] == 100)) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 201: //リプレイ＋レギュラー
+                    if ((hit_check(0, 0, 0)[2] == 1) || (hit_check(0, 0, 0)[2] == 200)) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 2: //ぶどうの場合
+                    if (hit_check(0, 0, 0)[2] == 2) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 102: //ぶどう＋ビッグ
+                    if ((hit_check(0, 0, 0)[2] == 2) || (hit_check(0, 0, 0)[2] == 100)) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 202: //ぶどう＋レギュラー
+                    if ((hit_check(0, 0, 0)[2] == 2) || (hit_check(0, 0, 0)[2] == 200)) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 3: //ベルの場合
+                  case 103:
+                  case 203:
+                    if (hit_check(0, 0, 0)[2] == 3) {
+                      this.status = 1;
+                    }
+                    if ((hit_check(0, 0, 0)[2] == 9999) && (this.status <= 3)) { //2マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 4: //太鼓の場合
+                  case 104:
+                  case 204:
+                    if (hit_check(0, 0, 0)[2] == 4) {
+                      this.status = 1;
+                    }
+                    if ((hit_check(0, 0, 0)[2] == 9999) && (this.status <= 3)) { //2マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 6: //連チェリーの場合
+                    if ((reel[0].visibleData()[0] == 4000) && ((this.visibleData()[0] == 2000) || (this.visibleData()[1] == 2000)) && (hit_check(0, 0, 0)[0] == 'チェリーチェリー')) { //左上にチェリーある場合
+                      this.status = 1;
+                    }
+                    if ((reel[0].visibleData()[1] == 4000) && (this.visibleData()[1] == 2000) && (hit_check(0, 0, 0)[0] == 'チェリーチェリー')) { //左中にチェリーある場合
+                      this.status = 1;
+                    }
+                    if ((reel[0].visibleData()[2] == 4000) && ((this.visibleData()[1] == 2000) || (this.visibleData()[2] == 2000)) && (hit_check(0, 0, 0)[0] == 'チェリーチェリー')) { //左下にチェリーある場合
+                      this.status = 1;
+                    }
+                    if ((reel[0].visibleData()[0] + reel[0].visibleData()[1] + reel[0].visibleData()[2] < 4000) && (hit_check(0, 0, 0)[2] == 9999)) { //左リールにチェリーが無い場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 50: //ぶどう＋チェリーの場合
+                    if ((hit_check(0, 0, 0)[2] == 2) || (hit_check(0, 0, 0)[3] == 2) || (hit_check(0, 0, 0)[4] == 2)) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 100: //ビッグボーナスの場合
+                  case 106:
+                    if ((hit_check(0, 0, 0)[2] == 100) || (hit_check(0, 0, 0)[3] == 100) || (hit_check(0, 0, 0)[4] == 100) || (hit_check(0, 0, 0)[2] == 999) || (hit_check(0, 0, 0)[3] == 999) || (hit_check(0, 0, 0)[4] == 999)) { //ビッグボーナスまたはリーチ目もしくはチェリー付きリーチ目の場合ストップ
+                      this.status = 1;
+                    }
+                    if ((hit_check(0, 0, 0)[2] == 9999) && (this.status <= 3) && (hit_check(1, 1, 0)[2] != 100) && (hit_check(1, 1, 0)[2] != 999)) { //2マス動いて子役ない場合(次のコマでボーナスやリーチ目が揃わない場合)には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if (((hit_check(0, 0, 0)[0] == 'チェリーチェリー') || (hit_check(0, 0, 0)[0] == 'チェリー')) && (this.status <= 3) && (hit_check(1, 1, 0)[2] != 100) && (hit_check(1, 1, 0)[2] != 999)) { //チェリーありで2マス動いて子役ない場合(次のコマでボーナスやリーチ目が揃わない場合)には強制停止1(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 200: //レギュラーボーナスの場合
+                  case 206:
+                    if ((hit_check(0, 0, 0)[2] == 200) || (hit_check(0, 0, 0)[3] == 200) || (hit_check(0, 0, 0)[4] == 200) || (hit_check(0, 0, 0)[2] == 999) || (hit_check(0, 0, 0)[3] == 999) || (hit_check(0, 0, 0)[4] == 999)) { //ビッグボーナスまたはリーチ目もしくはチェリー付きリーチ目の場合ストップ
+                      this.status = 1;
+                    }
+                    if ((hit_check(0, 0, 0)[2] == 9999) && (this.status <= 3) && (hit_check(1, 1, 0)[2] != 200) && (hit_check(1, 1, 0)[2] != 999)) { //2マス動いて子役ない場合(次のコマでボーナスやリーチ目が揃わない場合)には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if (((hit_check(0, 0, 0)[0] == 'チェリーチェリー') || (hit_check(0, 0, 0)[0] == 'チェリー')) && (this.status <= 3) && (hit_check(1, 1, 0)[2] != 200) && (hit_check(1, 1, 0)[2] != 999)) { //チェリーありで2マス動いて子役ない場合(次のコマでボーナスやリーチ目が揃わない場合)には強制停止1(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                }
+                break;
+              case 1.5: //ストップリール数が1の場合
+                if (reel[0].status == 0) { //左リールストップの場合
+                  switch (flag) {
+                    case 0: //はずれの場合
+                      this.status = 1;
+                      break;
+                    case 1: //リプレイの場合
+                    case 101:
+                    case 201:
+                      if ((reel[0].visibleData()[0] == 0) && ((this.visibleData()[0] == 0) || (this.visibleData()[1] == 0))) { //左上にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 0) && (this.visibleData()[1] == 0)) { //左中にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[2] == 0) && ((this.visibleData()[1] == 0) || (this.visibleData()[2] == 0))) { //左下にリプレイある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 2: //ぶどうの場合
+                    case 50:
+                    case 102:
+                    case 202:
+                      if ((reel[0].visibleData()[0] == 1) && ((this.visibleData()[0] == 1) || (this.visibleData()[1] == 1))) { //左上にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 1) && (this.visibleData()[1] == 1)) { //左中にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[2] == 1) && ((this.visibleData()[1] == 1) || (this.visibleData()[2] == 1))) { //左下にぶどうある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 3: //ベルの場合
+                    case 103:
+                    case 203:
+                      if ((reel[0].visibleData()[0] == 4) && ((this.visibleData()[0] == 4) || (this.visibleData()[1] == 4))) { //左上にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 4) && (this.visibleData()[1] == 4)) { //左中にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[2] == 4) && ((this.visibleData()[1] == 4) || (this.visibleData()[2] == 4))) { //左下にベルある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 4: //太鼓の場合
+                    case 104:
+                    case 204:
+                      if ((reel[0].visibleData()[0] == 16) && ((this.visibleData()[0] == 17) || (this.visibleData()[1] == 17))) { //左上に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 16) && (this.visibleData()[1] == 17)) { //左中に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[2] == 16) && ((this.visibleData()[1] == 17) || (this.visibleData()[2] == 17))) { //左下に太鼓ある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 6: //連チェリーの場合
+                      if ((reel[0].visibleData()[0] == 4000) && ((this.visibleData()[0] == 2000) || (this.visibleData()[1] == 2000))) { //左上にチェリーある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 4000) && (this.visibleData()[1] == 2000)) { //左中にチェリーある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[2] == 4000) && ((this.visibleData()[1] == 2000) || (this.visibleData()[2] == 2000))) { //左下にチェリーある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 106: //ボーナス(＋チェリー)
+                    case 206:
+                    case 100:
+                    case 200:
+                      if (((reel[0].visibleData()[0] == 100) || (reel[0].visibleData()[0] == 700)) && ((this.visibleData()[0] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[0] == 700) || (this.visibleData()[1] == 700))) { //左上にボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if (((reel[0].visibleData()[1] == 100) || (reel[0].visibleData()[1] == 700)) && ((this.visibleData()[1] == 100) || (this.visibleData()[1] == 700))) { //左中にボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if (((reel[0].visibleData()[2] == 100) || (reel[0].visibleData()[2] == 700)) && ((this.visibleData()[2] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[2] == 700) || (this.visibleData()[1] == 700))) { //左下にボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      break;
+                  }
+
+                } else { //右リールストップの場合
+                  switch (flag) {
+                    case 0: //はずれの場合
+                      this.status = 1;
+                      break;
+                    case 1: //リプレイの場合
+                    case 101:
+                    case 201:
+                      if ((reel[2].visibleData()[0] == 0) && ((this.visibleData()[0] == 0) || (this.visibleData()[1] == 0))) { //右上にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 0) && (this.visibleData()[1] == 0)) { //右中にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[2] == 0) && ((this.visibleData()[1] == 0) || (this.visibleData()[2] == 0))) { //右下にリプレイある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 2: //ぶどうの場合
+                    case 50:
+                    case 102:
+                    case 202:
+                      if ((reel[2].visibleData()[0] == 1) && ((this.visibleData()[0] == 1) || (this.visibleData()[1] == 1))) { //右上にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 1) && (this.visibleData()[1] == 1)) { //右中にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[2] == 1) && ((this.visibleData()[2] == 1) || (this.visibleData()[2] == 1))) { //下にぶどうある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 3: //ベルの場合
+                    case 103:
+                    case 203:
+                      if ((reel[2].visibleData()[0] == 4) && ((this.visibleData()[2] == 4) || (this.visibleData()[1] == 4))) { //右上にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 4) && (this.visibleData()[1] == 4)) { //右中にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[2] == 4) && ((this.visibleData()[2] == 4) || (this.visibleData()[2] == 4))) { //右下にベルある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 4: //太鼓の場合
+                    case 104:
+                    case 204:
+                      if ((reel[2].visibleData()[0] == 16) && ((this.visibleData()[2] == 17) || (this.visibleData()[1] == 17))) { //右上に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 16) && (this.visibleData()[1] == 17)) { //右中に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[2] == 16) && ((this.visibleData()[2] == 17) || (this.visibleData()[2] == 17))) { //右下に太鼓ある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 6: //連チェリーの場合
+                      if ((this.visibleData()[0] == 2000) || (this.visibleData()[1] == 2000) || (this.visibleData()[2] == 2000)) { //チェリーある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 106: //ビッグボーナス(＋チェリー)
+                    case 100:
+                      if ((reel[2].visibleData()[0] == 100) && ((this.visibleData()[0] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[0] == 700) || (this.visibleData()[1] == 700))) { //右上にボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 100) && ((this.visibleData()[1] == 100) || (this.visibleData()[1] == 700))) { //右中にボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[2] == 100) && ((this.visibleData()[2] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[2] == 700) || (this.visibleData()[1] == 700))) { //右下にボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 206: //レギュラーボーナス(＋チェリー)
+                    case 200:
+                      if ((reel[2].visibleData()[0] == 400) && ((this.visibleData()[0] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[0] == 700) || (this.visibleData()[1] == 700))) { //右上にボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[1] == 400) && ((this.visibleData()[1] == 100) || (this.visibleData()[1] == 700))) { //右中にボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[2].visibleData()[2] == 400) && ((this.visibleData()[2] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[2] == 700) || (this.visibleData()[1] == 700))) { //右下にボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      break;
+                  }
+                }
+                break;
+              case 2.5: //ストップリール数が0の場合
+                irre = 1; //イレギュラー順番
+                switch (flag) {
+                  case 0: //はずれの場合
+                    this.status = 1;
+                    break;
+                  case 1: //リプレイの場合
+                  case 101:
+                  case 201:
+                    if (this.visibleData()[0] * this.visibleData()[1] * this.visibleData()[2] == 0) { //リプレイがある場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 2: //ぶどうの場合
+                  case 50:
+                  case 102:
+                  case 202:
+                    if ((this.visibleData()[0] == 1) || (this.visibleData()[1] == 1) || (this.visibleData()[2] == 1)) { //ぶどうがある場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 3: //ベルの場合
+                  case 103:
+                  case 203:
+                    if ((this.visibleData()[0] == 4) || (this.visibleData()[1] == 4) || (this.visibleData()[2] == 4)) { //ベルがある場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 4: //太鼓の場合
+                  case 104:
+                  case 204:
+                    if ((this.visibleData()[0] == 17) || (this.visibleData()[1] == 17) || (this.visibleData()[2] == 17)) { //太鼓がある場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 6: //連チェリーの場合
+                    this.status = 1;
+                    break;
+                  case 100: //ボーナスの場合
+                  case 106:
+                  case 200:
+                  case 206:
+                    if ((this.visibleData()[0] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 700) || (this.visibleData()[1] == 700) || (this.visibleData()[2] == 700)) { //7がある場合
+                      this.status = 1;
+                    }
+                    break;
+                }
+                break;
+            }
+            this.status -= 1;
+          } else if ((((this.y - 45) % 60) == 0) && (this.status == 0)) {
+            moving -= 0.5;
+            if (audio_status == 1) {
+              audio[12].play(); //効果音
+            }
+            clearInterval(timerId[this.reelnum]);
+            ctx.drawImage(this.reel_image, 0, Math.floor(this.y), 148, 210, this.x, 20, 148, 210);
+            if (moving == 0) { //リールが全て止まった場合
+              judgement2();
+            }
+          }
+        }
+      }
+    }
+
+    //右リール回転用コンストラクタ
+    function Reel2Obj() {
+      this.roll2 = function () { //リール回転メソッド
+        this.y -= reel_speed;
+        if (this.y <= 45) {
+          this.y = 1305;
+        }
+        ctx.drawImage(this.reel_imageb, 0, Math.floor(this.y), 148, 210, this.x, 20, 148, 210);
+        if (this.status < 100) { //ストップの指示入った場合
+          if (((this.y - 45) % 60) == 20) {
+            switch (moving) {
+              case 0.5: //ストップリール数が2の場合
+                switch (flag) {
+                  case 0: //はずれの場合
+                    if (hit_check(0, 0, 0)[2] == 9999) {
+                      this.status = 1;
+                    }
+                    break;
+                  case 1: //リプレイの場合
+                    if (hit_check(0, 0, 0)[2] == 1) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 101: //リプレイ+ビッグ
+                    if ((hit_check(0, 0, 0)[2] == 1) || (hit_check(0, 0, 0)[2] == 100)) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 201: //リプレイ+レギュラー
+                    if ((hit_check(0, 0, 0)[2] == 1) || (hit_check(0, 0, 0)[2] == 200)) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 2: //ぶどうの場合
+                    if (hit_check(0, 0, 0)[2] == 2) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 102: //ぶどう+ビッグ
+                    if ((hit_check(0, 0, 0)[2] == 2) || (hit_check(0, 0, 0)[2] == 100)) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 202: //ぶどう＋レギュラー
+                    if ((hit_check(0, 0, 0)[2] == 2) || (hit_check(0, 0, 0)[2] == 200)) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 3: //ベルの場合
+                  case 103:
+                  case 203:
+                    if (hit_check(0, 0, 0)[2] == 3) {
+                      this.status = 1;
+                    }
+                    if ((hit_check(0, 0, 0)[2] == 9999) && (this.status == 2)) { //3マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 4: //太鼓の場合
+                  case 104:
+                  case 204:
+                    if (hit_check(0, 0, 0)[2] == 4) {
+                      this.status = 1;
+                    }
+                    if ((hit_check(0, 0, 0)[2] == 9999) && (this.status == 2)) { //3マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 6: //連チェリーの場合
+                    if (((hit_check(0, 0, 0)[0] == 'チェリーチェリー') || (hit_check(0, 0, 0)[0] == 'チェリー')) || (hit_check(0, 0, 0)[2] == 9999)) { //連チェリーで2重役になっていない、またはチェリーがなくハズレの場合ストップ
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 50: //ぶどう＋チェリーの場合
+                    if ((hit_check(0, 0, 0)[2] == 2) || (hit_check(0, 0, 0)[3] == 2) || (hit_check(0, 0, 0)[4] == 2)) {
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 100: //ビッグボーナスの場合
+                  case 106:
+                    if ((hit_check(0, 0, 0)[2] == 100) || (hit_check(0, 0, 0)[3] == 100) || (hit_check(0, 0, 0)[4] == 100) || (hit_check(0, 0, 0)[2] == 999) || (hit_check(0, 0, 0)[3] == 999) || (hit_check(0, 0, 0)[4] == 999)) { //ビッグボーナスまたはリーチ目もしくはチェリー付きリーチ目の場合ストップ
+                      this.status = 1;
+                    }
+                    if ((hit_check(0, 0, 0)[2] == 9999) && (this.status == 2)) { //3マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if (((hit_check(0, 0, 0)[0] == 'チェリーチェリー') || (hit_check(0, 0, 0)[0] == 'チェリー')) && (this.status == 2)) { //チェリーありで3マス動いて子役ない場合には強制停止1(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                  case 200: //レギュラーボーナスの場合
+                  case 206:
+                    if ((hit_check(0, 0, 0)[2] == 200) || (hit_check(0, 0, 0)[3] == 200) || (hit_check(0, 0, 0)[4] == 200) || (hit_check(0, 0, 0)[2] == 999) || (hit_check(0, 0, 0)[3] == 999) || (hit_check(0, 0, 0)[4] == 999)) { //ビッグボーナスまたはリーチ目もしくはチェリー付きリーチ目の場合ストップ
+                      this.status = 1;
+                    }
+                    if ((hit_check(0, 0, 0)[2] == 9999) && (this.status == 2)) { //3マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if (((hit_check(0, 0, 0)[0] == 'チェリーチェリー') || (hit_check(0, 0, 0)[0] == 'チェリー')) && (this.status == 2)) { //チェリーありで3マス動いて子役ない場合には強制停止1(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    if ((irre == 1) && (hit_check(0, 0, 0)[2] == 9999) && (this.status <= 4)) { //最初に中リール、右リールを止めて、さらに1マス動いて子役ない場合には強制停止(子役を揃えないようにするため)
+                      this.status = 1;
+                    }
+                    break;
+                }
+                break;
+              case 1.5: //ストップリール数が1の場合
+                if (reel[0].status == 0) { //左リールストップの場合
+                  switch (flag) {
+                    case 0: //はずれの場合
+                      this.status = 1;
+                      break;
+                    case 1: //リプレイの場合
+                    case 101:
+                    case 201:
+                      if (((reel[0].visibleData()[0] == 0) || (reel[0].visibleData()[2] == 0)) && ((this.visibleData()[0] == 0) || (this.visibleData()[2] == 0))) { //左上または左下にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 0) && (this.visibleData()[1] == 0)) { //左中にリプレイある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 2: //ぶどうの場合
+                    case 50:
+                    case 102:
+                    case 202:
+                      if (((reel[0].visibleData()[0] == 1) || (reel[0].visibleData()[2] == 1)) && ((this.visibleData()[0] == 1) || (this.visibleData()[2] == 1))) { //左上または左下にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 1) && (this.visibleData()[1] == 1)) { //左中にぶどうある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 3: //ベルの場合
+                    case 103:
+                    case 203:
+                      if (((reel[0].visibleData()[0] == 4) || (reel[0].visibleData()[2] == 4)) && ((this.visibleData()[0] == 4) || (this.visibleData()[2] == 4))) { //左上または左下にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 4) && (this.visibleData()[1] == 4)) { //左中にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] != reel[2].visibleData()[1]) && (this.status == 2)) { //左右リールの中段リールが違う絵柄で3コマ滑ってる場合(ダブルリーチ防止)
+                        this.status = 1;
+                      }
+                      break;
+                    case 4: //太鼓の場合
+                    case 104:
+                    case 204:
+                      if (((reel[0].visibleData()[0] == 16) || (reel[0].visibleData()[2] == 16)) && ((this.visibleData()[0] == 16) || (this.visibleData()[2] == 16))) { //左上または左下にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 16) && (this.visibleData()[1] == 16)) { //左中に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] != reel[2].visibleData()[1]) && (this.status == 2)) { //左右リールの中段リールが違う絵柄で3コマ滑ってる場合(ダブルリーチ防止)
+                        this.status = 1;
+                      }
+                      break;
+                    case 6: //連チェリーの場合
+                      this.status = 1;
+                      break;
+                    case 106: //ビッグボーナス(＋チェリー)
+                    case 100:
+                      if (((reel[0].visibleData()[0] == 100) || (reel[0].visibleData()[2] == 100)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100))) { //左上または左下にビッグボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 100) && (this.visibleData()[1] == 100)) { //左中にビッグボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if (((reel[0].visibleData()[0] == 700) | (reel[0].visibleData()[2] == 700)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 400) || (this.visibleData()[2] == 400))) { //左上または左下にレギュラーボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 700) && ((this.visibleData()[1] == 100) || (this.visibleData()[1] == 400))) { //左中にレギュラーボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] != reel[2].visibleData()[1]) && (this.status == 2)) { //左右リールの中段リールが違う絵柄で3コマ滑ってる場合(ダブルリーチ防止)
+                        this.status = 1;
+                      }
+                      break;
+                    case 206:　//レギュラーボーナス(＋チェリー)
+                    case 200:
+                      if (((reel[0].visibleData()[0] == 100) || (reel[0].visibleData()[2] == 100)) && ((this.visibleData()[0] == 400) || (this.visibleData()[2] == 400))) { //左上または左下にビッグボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 100) && (this.visibleData()[1] == 400)) { //左中にビッグボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if (((reel[0].visibleData()[0] == 700) | (reel[0].visibleData()[2] == 700)) && ((this.visibleData()[0] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 400) || (this.visibleData()[2] == 400))) { //左上または左下にレギュラーボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] == 700) && ((this.visibleData()[1] == 100) || (this.visibleData()[1] == 400))) { //左中にレギュラーボーナス絵柄ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[0].visibleData()[1] != reel[2].visibleData()[1]) && (this.status == 2)) { //左右リールの中段リールが違う絵柄で3コマ滑ってる場合(ダブルリーチ防止)
+                        this.status = 1;
+                      }
+                      break;
+                  }
+
+                } else { //中リールストップの場合
+                  switch (flag) {
+                    case 0: //はずれの場合
+                      this.status = 1;
+                      break;
+                    case 1: //リプレイの場合
+                    case 101:
+                    case 201:
+                      if ((reel[1].visibleData()[0] == 0) && (this.visibleData()[0] == 0)) { //中上にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 0) && ((this.visibleData()[0] == 0) || (this.visibleData()[1] == 0) || (this.visibleData()[2] == 0))) { //中中にリプレイある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 0) && (this.visibleData()[2] == 0)) { //中下にリプレイある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 2: //ぶどうの場合
+                    case 50:
+                    case 102:
+                    case 202:
+                      if ((reel[1].visibleData()[0] == 1) && (this.visibleData()[0] == 1)) { //中上にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 1) && ((this.visibleData()[0] == 1) || (this.visibleData()[1] == 1) || (this.visibleData()[2] == 1))) { //中中にぶどうある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 1) && (this.visibleData()[2] == 1)) { //中下にぶどうある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 3: //ベルの場合
+                    case 103:
+                    case 203:
+                      if ((reel[1].visibleData()[0] == 4) && (this.visibleData()[0] == 4)) { //中上にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 4) && ((this.visibleData()[0] == 4) || (this.visibleData()[1] == 4) || (this.visibleData()[2] == 4))) { //中中にベルある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 4) && (this.visibleData()[2] == 4)) { //中下にベルある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 4: //太鼓の場合
+                    case 104:
+                    case 204:
+                      if ((reel[1].visibleData()[0] == 17) && (this.visibleData()[0] == 16)) { //中上に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 17) && ((this.visibleData()[0] == 16) || (this.visibleData()[1] == 16) || (this.visibleData()[2] == 16))) { //中中に太鼓ある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 17) && (this.visibleData()[2] == 16)) { //中下に太鼓ある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 6: //連チェリーの場合
+                      this.status = 1;
+                      break;
+                    case 106: //ビッグボーナス(＋チェリー)
+                    case 100:
+                      if ((reel[1].visibleData()[0] == 100) && (this.visibleData()[0] == 100)) { //中上にビッグある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 100) && ((this.visibleData()[0] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[2] == 100))) { //中中にビッグある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 100) && (this.visibleData()[2] == 100)) { //中下にビッグある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[0] == 700) && ((this.visibleData()[0] == 100) || (this.visibleData()[0] == 400))) { //中上にBARある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 700) && ((this.visibleData()[0] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 400) || (this.visibleData()[1] == 400) || (this.visibleData()[2] == 400))) { //中中にBARある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 700) && ((this.visibleData()[0] == 100) || (this.visibleData()[0] == 400))) { //中下にBARある場合
+                        this.status = 1;
+                      }
+                      break;
+                    case 206:　//レギュラーボーナス(＋チェリー)
+                    case 200:
+                      if ((reel[1].visibleData()[0] == 100) && (this.visibleData()[0] == 400)) { //中上にビッグある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 100) && ((this.visibleData()[0] == 400) || (this.visibleData()[1] == 400) || (this.visibleData()[2] == 400))) { //中中にビッグある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 100) && (this.visibleData()[2] == 400)) { //中下にビッグある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[0] == 700) && ((this.visibleData()[0] == 100) || (this.visibleData()[0] == 400))) { //中上にBARある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[1] == 700) && ((this.visibleData()[0] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[2] == 100) || (this.visibleData()[0] == 400) || (this.visibleData()[1] == 400) || (this.visibleData()[2] == 400))) { //中中にBARある場合
+                        this.status = 1;
+                      }
+                      if ((reel[1].visibleData()[2] == 700) && ((this.visibleData()[0] == 100) || (this.visibleData()[0] == 400))) { //中下にBARある場合
+                        this.status = 1;
+                      }
+                      break;
+                  }
+                }
+                break;
+              case 2.5: //ストップリール数が0の場合
+                irre = 1; //イレギュラー順番
+                switch (flag) {
+                  case 0: //はずれの場合
+                    this.status = 1;
+                    break;
+                  case 1: //リプレイの場合
+                  case 101:
+                  case 201:
+                    if (this.visibleData()[0] * this.visibleData()[1] * this.visibleData()[2] == 0) { //リプレイがある場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 2: //ぶどうの場合
+                  case 50:
+                  case 102:
+                  case 202:
+                    if ((this.visibleData()[0] == 1) || (this.visibleData()[1] == 1) || (this.visibleData()[2] == 1)) { //ぶどうがある場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 3: //ベルの場合
+                  case 103:
+                  case 203:
+                    if ((this.visibleData()[0] == 4) || (this.visibleData()[1] == 4) || (this.visibleData()[2] == 4)) { //ベルがある場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 4: //太鼓の場合
+                  case 104:
+                  case 204:
+                    if ((this.visibleData()[0] == 16) || (this.visibleData()[1] == 16) || (this.visibleData()[2] == 16)) { //太鼓がある場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 6: //連チェリーの場合
+                    this.status = 1;
+                    break;
+                  case 100: //ビッグボーナスの場合
+                  case 106:
+                    if ((this.visibleData()[0] == 100) || (this.visibleData()[1] == 100) || (this.visibleData()[2] == 100)) { //7がある場合
+                      this.status = 1;
+                    }
+                    break;
+                  case 200: //レギュラーボーナスの場合
+                  case 206:
+                    if ((this.visibleData()[0] == 400) || (this.visibleData()[1] == 400) || (this.visibleData()[2] == 400)) { //BARがある場合
+                      this.status = 1;
+                    }
+                    break;
+                }
+                break;
+            }
+            this.status -= 1;
+          } else if ((((this.y - 45) % 60) == 0) && (this.status == 0)) {
+            moving -= 0.5;
+            if (audio_status == 1) {
+              audio[13].play(); //効果音
+            }
+            clearInterval(timerId[this.reelnum]);
+            ctx.drawImage(this.reel_image, 0, Math.floor(this.y), 148, 210, this.x, 20, 148, 210);
+            if (moving == 0) { //リールが全て止まった場合
+              judgement2();
+            }
+          }
+        }
+      }
+    }
+
+    function checker() { //フラグ表示
+      var textf = document.getElementById('checker0');
+      var textc = '';
+      if (flag >= 100) {
+        if (Math.floor(flag / 100) * 100 == 100) {
+          textc = textc + 'ビッグボーナス';
+        } else if (Math.floor(flag / 100) * 100 == 200) {
+          textc = textc + 'レギュラーボーナス';
+        }
+        if (Math.floor(flag / 100) * 100 != flag) {
+          textc = textc + '＋';
+        }
+      }
+      switch (flag) {
+        case 0:
+          textc = textc + 'はずれ';
+          break;
+        case 1:
+        case 101:
+        case 201:
+          textc = textc + 'リプレイ';
+          break;
+        case 2:
+        case 102:
+        case 202:
+          textc = textc + 'ぶどう';
+          break;
+        case 3:
+        case 103:
+        case 203:
+          textc = textc + 'ベル';
+          break;
+        case 4:
+        case 104:
+        case 204:
+          textc = textc + '太鼓';
+          break;
+        case 6:
+        case 106:
+        case 206:
+          textc = textc + 'チェリー';
+          break;
+        case 50:
+          textc = 'ぶどう＋チェリー';
+          break;
+      }
+
+      textf.textContent = textc; //役表示
+
+    }
+
+    function infopanel() { //情報表示
+      document.getElementById('d_games').textContent = games; //ゲーム数
+      document.getElementById('d_bgames').textContent = bgames; //ボーナス間ゲーム数
+      document.getElementById('d_medals').textContent = medals; //総メダル数
+      document.getElementById('d_bb').textContent = bb; //ビッグボーナス数
+      document.getElementById('d_rb').textContent = rb; //レギュラーボーナス数
+      if ((bb + rb) > 0) {
+        document.getElementById('d_bratio').textContent = '1/' + Math.floor((games / (bb + rb)) * 10 + 0.5) / 10;
+      }
+    }
+
+    function infohistory() { //履歴表示
+      var a, b, c; //計算用
+      var h_text; //表示グラフ用テキスト
+      h_text = 'P';
+      a = Math.floor((bgames - 1) / 100);
+      if (bgames == 0) {
+        h_text += '<br>';
+      } else if (a > 10) {
+        a = 10;
+        h_text += history_bar[a] + bgames + '<br>';
+      } else {
+        h_text += history_bar[a] + bgames + '<br>';
+      }
+      for (i = 0; i < 10; i++) {
+        a = Math.floor((bgames_history[i] - 1) / 100);
+        if ((bgames_history[i] == 0) || (bgames_history[i] == null)) {
+          h_text += '<br>';
+        } else if (a > 10) {
+          a = 10;
+          h_text += btype_history[i] + history_bar[a] + bgames_history[i] + '<br>';
+        } else {
+          h_text += btype_history[i] + history_bar[a] + bgames_history[i] + '<br>';
+        }
+      }
+
+      document.getElementById('d_bhistory').innerHTML = h_text;
+
+    }
+
+    function reel_roll(num) { //リール回転関数
+      switch (num) {
+        case 0:
+          reel[0].roll0();
+          break;
+        case 1:
+          reel[1].roll1();
+          break;
+        case 2:
+          reel[2].roll2();
+          break;
+      }
+    }
+
+    function hit_check(num, yup, flash) { //リール当たり判定処理(引数: 1.リール番号, 2.1のリールが上にどれくらいずれるか, 3.フラッシュありか)
+      if (num == null) {
+        var h_num = 0;
+      } else {
+        var h_num = num;
+      }
+      var h_up = [0, 0, 0];
+      if (yup == null) {
+        h_up[h_num] = 0;
+      } else {
+        h_up[h_num] = yup;
+      }
+      var h_sum = 0; //リール合計値計算用
+      var h_sumr1 = 9999; //リール合計値戻り値(9999はハズレ)
+      var h_sumr2 = 9999; //リール合計値戻り値(9999はハズレ)
+      var h_sumr3 = 9999; //リール合計値戻り値(9999はハズレ)
+      var h_name = ''; //役名戻り値
+      var h_get = 0; //獲得メダル数戻り値
+      if ((flash == null) || (flash == 0)) {
+        var h_flash = 0; //フラッシュ無し
+      } else {
+        var h_flash = 1; //フラッシュ有り
+      }
+      //真ん中
+      var anum = 1;
+      h_sum = reel[0].visibleData(h_up[0])[1] + reel[1].visibleData(h_up[1])[1] + reel[2].visibleData(h_up[2])[1];
+      sub_hit_check();
+      //上
+      anum = 2;
+      h_sum = reel[0].visibleData(h_up[0])[0] + reel[1].visibleData(h_up[1])[0] + reel[2].visibleData(h_up[2])[0];
+      sub_hit_check();
+      //下
+      anum = 3;
+      h_sum = reel[0].visibleData(h_up[0])[2] + reel[1].visibleData(h_up[1])[2] + reel[2].visibleData(h_up[2])[2];
+      sub_hit_check();
+      //右下へ
+      anum = 4;
+      h_sum = reel[0].visibleData(h_up[0])[0] + reel[1].visibleData(h_up[1])[1] + reel[2].visibleData(h_up[2])[2];
+      sub_hit_check();
+      //右上へ
+      anum = 5;
+      h_sum = reel[0].visibleData(h_up[0])[2] + reel[1].visibleData(h_up[1])[1] + reel[2].visibleData(h_up[2])[0];
+      sub_hit_check();
+
+      if (h_get > 14) { //14枚以上獲得でも14枚固定
+        h_get = 14;
+      }
+
+      return [h_name, h_get, h_sumr1, h_sumr2, h_sumr3]; //★戻り値 0.役名,1.獲得メダル数,2.役種類1,3.役種類2,4.役種類3
+
+      function sub_hit_check() {
+        if (h_sum >= 2000) { //合計値2000以上の場合には1000の位で四捨五入(チェリー判定用)
+          h_sum = Math.floor(h_sum / 1000) * 1000;
+        }
+        if (hit_data[h_sum]) {
+          h_name += hit_data[h_sum].name; //役名
+          if (bonus_flag == 0) {
+            h_get += hit_data[h_sum].get; //獲得メダル数(通常時)
+          } else {
+            h_get += hit_data[h_sum].bget; //獲得メダル数(ボーナス時)						
+          }
+          if (h_sumr1 == 9999) {
+            h_sumr1 = hit_data[h_sum].hit; //リール合計値1
+          } else if (h_sumr2 == 9999) {
+            h_sumr2 = hit_data[h_sum].hit; //リール合計値2
+          } else {
+            h_sumr3 = hit_data[h_sum].hit; //リール合計値3
+          }
+          if ((h_flash == 1) && (hit_data[h_sum].hit < 999)) { //ライト点灯
+            a_light[anum] = 19;
+            a_timerId[anum] = setInterval(atari_light, 100, anum);
+          }
+        }
+      }
+    }
+
+    function judgement() { //リール停止中処理(ボタン離した時)
+      if (moving == 0) { //リールが止まったら実行する(止まっていない場合には0.1秒後に再実行)
+        if ((flag >= 100) && (hit_check(0, 0, 0)[2] != 100) && (hit_check(0, 0, 0)[3] != 100) && (hit_check(0, 0, 0)[4] != 100) && (hit_check(0, 0, 0)[2] != 200) && (hit_check(0, 0, 0)[3] != 200) && (hit_check(0, 0, 0)[4] != 200)) { //レギュラーまたはビッグのフラグが立っていて、かつ当たりを引いていない場合にはペカり
+          document.getElementById('img_lets').src = 'letsa.gif';
+          if ((audio_status == 1) && (Math.random() < 0.5) & (peka_sound == 0)) { //50%の抽選に当たり、ボーナスサウンドフラグが立っていない場合にはボーナスサウンドを鳴らす
+            audio[29].play(); //効果音
+          }
+          peka_sound = 1;
+        }
+      } else {
+        setTimeout(judgement, 100);
+      }
+    }
+
+    function judgement2() { //リール停止処理(リールが全て止まった時)
+      var winning = hit_check(0, 0, 1)[1]; //獲得枚数
+      var yaku = hit_check(0, 0, 0)[2]; //当たり役
+
+      if ((winning > 0) && (bonus_flag == 0)) { //通常時＆当たり
+        counter_run = 1;
+        medals += winning; //総メダル数プラス
+        win_credits(winning, 0); //カウンター表示
+      } else if ((winning > 0) && (bonus_flag > 0)) { //ボーナス時＆当たり
+        counter_run = 1;
+        medals += winning; //総メダル数プラス
+        win_credits(winning, 0, 1); //カウンター表示(ボーナス引数追加)		
+      } else if (yaku != 1) { //はずれ
+        document.getElementById('bet').src = 'beta.gif';
+      } else { //リプレイ
+        moving = 100;
+        if (audio_status == 1) {
+          audio[27].play(); //効果音
+        }
+      }
+
+      if (yaku != 1) {
+        betting = 0; //リプレイでなければ投入枚数ゼロにリセット
+        if ((yaku == 100) || (hit_check(0, 0, 0)[3] == 100) || (hit_check(0, 0, 0)[4] == 100)) { //ビッグボーナス開始
+          bonus_flag = 1;
+          bonus_counter = 0;
+          flag = 0;
+          bb += 1; //ビッグボーナス+1
+          bonus_display();
+          document.getElementById('img_lets').src = 'lets.gif';
+          peka_sound = 0;
+          document.getElementById('panel_big').style.opacity = 1; //赤パネル表示
+          bonus_flash = 10;
+          p_timerId = setInterval(bonus_panel, 100);
+          if (audio_status == 1) {
+            try { //IEエラー回避処理用
+              audio[0].currentTime = 0;
+            } catch (e) {
+            }
+            audio[0].play(); //効果音
+          }
+          setTimeout(bonus_music, 5500); //ボーナスBGM
+        }
+        if ((yaku == 200) || (hit_check(0, 0, 0)[3] == 200) || (hit_check(0, 0, 0)[4] == 200)) { //レギュラーボーナス開始
+          bonus_flag = 2;
+          bonus_counter = 0;
+          flag = 0;
+          rb += 1; //レギュラーボーナス+1
+          bonus_display();
+          document.getElementById('img_lets').src = 'lets.gif';
+          peka_sound = 0;
+          document.getElementById('panel_regular').style.opacity = 1; //緑パネル表示
+          bonus_flash = 10;
+          p_timerId = setInterval(bonus_panel, 100);
+          if (audio_status == 1) {
+            audio[2].play(); //BGM演奏
+          }
+          audio[2].loop = true;
+        }
+      }
+    }
+
+    function lever() { //レバー
+      document.getElementById('div_lever').style.top = '330px';
+      if ((moving == 100) && (betting > 0) && (counter_run == 0)) { //回転中のリールがなく投入枚数あれば、リールスタート
+        if (wait_status == 0) {
+          reel_start();
+        } else if (wait_status == 1) {
+          wait_status = 2; //リール回転スタート待ち
+          if (audio_status == 1) {
+            audio[28].play(); //BGM演奏
+          }
+          audio[28].loop = true;
+        }
+      }
+    }
+
+    function waitwait() { //ウエイト完了処理
+      if (wait_status == 2) { //リール回転スタート待ちならリール回転スタート
+        wait_status = 0; //ウエイト状態リセット
+        audio[28].pause(); //BGM演奏停止
+        try { //IEエラー回避処理用
+          audio[0].currentTime = 0;
+        } catch (e) {
+        }
+        reel_start();
+      } else {
+        wait_status = 0; //ウエイト状態リセット
+      }
+    }
+
+    function reel_start() { //ウエイト処理無しまたは終了後のリール回転処理開始
+      if (audio_status == 1) {
+        audio[10].play(); //効果音
+      }
+      moving = 3; //リール3本動作開始フラグ
+      irre = 0; //イレギュラーボタン押し順リセット
+      if (wait_on == 1) { //ウエイト設定オンの場合にはウエイト状態オンにする
+        wait_status = 1;
+        setTimeout(waitwait, 4100);
+      }
+      for (i = 1; i <= 5; i++) { //当たりライトの消去(リプレイ時の追加処理用)
+        clearInterval(a_timerId[i]);
+        document.getElementById('img_light' + i).style.opacity = 0;
+        a_light[i] = 0;
+      }
+      temp_settei = settei; //一時設定保存
+      if (bonus_flag == 1) { //ビッグボーナスの場合
+        temp_settei = 100;
+      } else if (bonus_flag == 2) { //レギュラーボーナスの場合
+        temp_settei = 200;
+      } else {
+        games += 1; //総ゲーム数+1
+        bgames += 1; //ボーナス間+1
+      }
+      flag = Math.floor(flag / 100) * 100; //フラグリセット(ボーナスフラグは残す)
+      var roulette = Math.random() * 100000; //乱数発生
+      if (roulette <= settei_data[temp_settei].r[0]) {
+        flag += 1; //リプレイ 
+      } else if (roulette <= settei_data[temp_settei].r[1]) {
+        flag += 2; //ぶどう 
+      } else if (roulette <= settei_data[temp_settei].r[2]) {
+        flag += 3; //ベル 
+      } else if (roulette <= settei_data[temp_settei].r[3]) {
+        flag += 4; //太鼓 
+      } else if (roulette <= settei_data[temp_settei].r[4]) {
+        flag += 6; //チェリー 
+      } else if (roulette <= settei_data[temp_settei].r[5]) {
+        flag += 50; //ぶどう＋チェリー(レギュラーボーナス用) 
+      } else if ((roulette <= settei_data[temp_settei].r[6]) && (flag < 100)) {
+        if (Math.random() < 0.7) {
+          flag += 100; //ビッグボーナス 
+        } else {
+          flag += 106; //ビッグボーナス+チェリー 					
+        }
+      } else if ((roulette <= settei_data[temp_settei].r[7]) && (flag < 100)) {
+        if (Math.random() < 0.7) {
+          flag += 200; //レギュラーボーナス 
+        } else {
+          flag += 206; //レギュラーボーナス+チェリー 					
+        }
+      }
+      for (i = 0; i <= 2; i++) { //リール回転開始
+        reel[i].status = 100;
+        clearInterval(timerId[i]);
+        timerId[i] = setInterval(reel_roll, reel_freq, i);
+      }
+      if ((flag >= 100) && (Math.random() <= 0.25)) {
+        document.getElementById('img_lets').src = 'letsa.gif';
+        peka_sound = 1;
+      }
+    }
+
+    function leverup() { //レバー戻る
+      document.getElementById('div_lever').style.top = '320px';
+    }
+
+    function button0() { //左ボタン
+      if ((reel[0].status == 100) && (Math.floor(moving) == moving)) {
+        reel[0].status = 5;
+        moving -= 0.5;
+      }
+      document.getElementById('button0').src = 'button1.gif';
+    }
+
+    function button0up() { //左ボタン戻る
+      document.getElementById('button0').src = 'button.gif';
+      if (moving <= 0.5) {
+        judgement();
+      }
+    }
+
+    function button1() { //中ボタン
+      if ((reel[1].status == 100) && (Math.floor(moving) == moving)) {
+        reel[1].status = 5;
+        moving -= 0.5;
+      }
+      document.getElementById('button1').src = 'button1.gif';
+    }
+
+    function button1up() { //中ボタン戻る
+      document.getElementById('button1').src = 'button.gif';
+      if (moving <= 0.5) {
+        judgement();
+      }
+    }
+
+    function button2() { //右ボタン
+      if ((reel[2].status == 100) && (Math.floor(moving) == moving)) {
+        reel[2].status = 5;
+        moving -= 0.5;
+      }
+      document.getElementById('button2').src = 'button1.gif';
+    }
+
+    function button2up() { //右ボタン戻る
+      document.getElementById('button2').src = 'button.gif';
+      if (moving <= 0.5) {
+        judgement();
+      }
+    }
+
+    function bet() { //BETボタン
+      if ((moving == 0) && (betting == 0) && (counter_run == 0)) {
+        if (bonus_flag == 0) {
+          betting = 3;
+          medals -= betting; //総メダル数マイナス
+        } else {
+          betting = 1; //ボーナス時はBET1枚
+          medals -= betting; //総メダル数マイナス
+        }
+        moving = 100;
+        counter_run = 1;
+        bonus_display();
+        bet_credits(betting, 0);
+        win_display();
+        document.getElementById('bet').src = 'betb1.gif';
+        for (i = 1; i <= 5; i++) { //当たりライトの消去
+          clearInterval(a_timerId[i]);
+          document.getElementById('img_light' + i).style.opacity = 0;
+          a_light[i] = 0;
+        }
+      } else if ((moving > 0) || (counter_run == 1)) {
+        document.getElementById('bet').src = 'betb1.gif';
+      } else {
+        document.getElementById('bet').src = 'beta1.gif';
+      }
+    }
+
+    function betup() { //BETボタン戻る
+      if ((betting == 0) && (counter_run == 0)) {
+        document.getElementById('bet').src = 'beta.gif';
+      } else {
+        document.getElementById('bet').src = 'betb.gif';
+      }
+    }
+
+    function multiprocess() { //マルチ処理
+      if ((betting == 0) && (mp == 0)) {
+        bet();
+        mp = 1;
+      } else if ((moving == 100) && (mp == 0)) {
+        lever();
+        mp = 2;
+      } else if ((reel[0].status == 100) && (mp == 0)) {
+        button0();
+        mp = 3;
+      } else if ((reel[1].status == 100) && (mp == 0)) {
+        button1();
+        mp = 4;
+      } else if ((reel[2].status == 100) && (mp == 0)) {
+        button2();
+        mp = 5
+      }
+    }
+
+    function multiprocessup() { //マルチ処理(ボタン戻る)
+      if (mp == 1) {
+        betup();
+        mp = 0;
+      } else if (mp == 2) {
+        leverup();
+        mp = 0;
+      } else if (mp == 3) {
+        button0up();
+        mp = 0;
+      } else if (mp == 4) {
+        button1up();
+        mp = 0;
+      } else if (mp == 5) {
+        button2up();
+        mp = 0;
+      }
+      mp = 0;
+    }
+
+    function credits_display() { //クレジット表示処理
+      var digit = 100000; //桁
+      var hyoji_c = credit; //クレジット代入
+      var suji = 0; //数字
+      for (i = 0; i <= 5; i++) {
+        if ((credit >= digit) || ((credit == 0) && (digit == 1))) { //クレジット桁より大きいか、桁が1でクレジットゼロの場合数字表示
+          suji = Math.floor(hyoji_c / digit);
+          document.getElementById('c' + i).src = suji + '.gif';
+        } else {
+          document.getElementById('c' + i).src = 'blank.gif';
+        }
+        hyoji_c = hyoji_c - Math.floor(hyoji_c / digit) * digit;
+        digit /= 10;
+      }
+    }
+
+    function bet_credits(_bet, _sub) { //BET→表示クレジット
+      credit -= 1;
+      if (audio_status == 1) {
+        audio[14 + bet_sound].play(); //効果音
+      }
+      bet_sound = (bet_sound < 2) ? bet_sound + 1 : 0;
+      if (credit < 0) {
+        credit += 50;
+      }
+      _sub += 1;
+      credits_display();
+      if (_sub < _bet) {
+        setTimeout(bet_credits, 100, _bet, _sub);
+      } else {
+        counter_run = 0;
+      }
+    }
+
+    function win_credits(_win, _sub, _bf) { //WIN→表示クレジット
+      credit += 1;
+      if (audio_status == 1) {
+        audio[17 + pay_sound].play(); //効果音
+      }
+      pay_sound = (pay_sound < 9) ? pay_sound + 1 : 0;
+      if (_bf > 0) { //ボーナスありの場合
+        bonus_counter += 1;
+        bonus_display();
+      } else {
+        _bf = 0;
+      }
+      if (credit > 999999) {
+        credit = 999999;
+      }
+      _sub += 1;
+      credits_display();
+      win_display(_sub);
+      if (_sub < _win) {
+        setTimeout(win_credits, 100, _win, _sub, _bf);
+      } else {
+        if ((bonus_flag == 1) && (bonus_counter > 336)) { //ビッグボーナス336枚超で終了
+          audio[1].pause(); //BGM演奏停止
+          try { //IEエラー回避処理用
+            audio[1].currentTime = 0;
+          } catch (e) {
+          }
+          if (audio_status == 1) {
+            audio[3].play(); //BGM演奏
+          }
+          setTimeout(bonus_finish, 4000); //4秒間ウエイト
+        } else if ((bonus_flag == 2) && (bonus_counter > 98)) { //レギュラーボーナス98枚超で終了
+          bonus_finish();
+          try { //IEエラー回避処理用
+            audio[2].currentTime = 0;
+          } catch (e) {
+          }
+          audio[2].pause(); //BGM演奏停止
+          try { //IEエラー回避処理用
+            audio[2].currentTime = 0;
+          } catch (e) {
+          }
+        } else {
+          counter_run = 0; //カウンター動作フラグ終了
+          document.getElementById('bet').src = 'beta.gif'; //BETボタン点灯
+        }
+      }
+    }
+
+    function win_display(_win) { //支払い表示処理
+      var digit = 10; //桁
+      if (_win) {
+        var hyoji_c = _win; //代入
+        var suji = 0; //数字
+        for (i = 0; i <= 1; i++) {
+          if ((_win >= digit) || ((_win == 0) && (digit == 1))) {
+            suji = Math.floor(hyoji_c / digit);
+            document.getElementById('w' + i).src = suji + '.gif';
+          } else {
+            document.getElementById('w' + i).src = 'blank.gif';
+          }
+          hyoji_c = hyoji_c - Math.floor(hyoji_c / digit) * digit;
+          digit /= 10;
+        }
+      } else {
+        document.getElementById('w0').src = 'blank.gif';
+        document.getElementById('w1').src = 'blank.gif';
+      }
+    }
+
+    function bonus_display() { //ボーナス表示処理
+      if (bonus_flag > 0) {
+        if (bonus_flag == 1) {
+          document.getElementById('bt').src = 'h.gif';
+        } else {
+          document.getElementById('bt').src = 'l.gif';
+        }
+        var digit = 100; //桁
+        var hyoji_b = bonus_counter; //ボーナスカウンター代入
+        var suji = 0; //数字
+        for (i = 0; i <= 2; i++) {
+          if ((bonus_counter >= digit) || ((bonus_counter == 0) && (digit == 1))) { //クレジット桁より大きいか、桁が1でクレジットゼロの場合数字表示
+            suji = Math.floor(hyoji_b / digit);
+            document.getElementById('b' + i).src = suji + '.gif';
+          } else {
+            document.getElementById('b' + i).src = 'blank.gif';
+          }
+          hyoji_b = hyoji_b - Math.floor(hyoji_b / digit) * digit;
+          digit /= 10;
+        }
+      } else {
+        document.getElementById('bt').src = 'blank.gif';
+        document.getElementById('b0').src = 'blank.gif';
+        document.getElementById('b1').src = 'blank.gif';
+        document.getElementById('b2').src = 'blank.gif';
+      }
+    }
+
+    function bonus_panel() { //ボーナスパネルフラッシュ用
+      if (bonus_flash >= 0) {
+        var opac = bonus_flash / 10;
+      } else {
+        var opac = (-bonus_flash) / 10;
+      }
+      bonus_flash = (bonus_flash > -10) ? bonus_flash - 1 : 10;
+      if (bonus_flag == 1) {
+        document.getElementById('panel_big').style.opacity = opac;
+      } else {
+        document.getElementById('panel_regular').style.opacity = opac;
+      }
+
+    }
+
+    function bonus_finish() { //ボーナス終了時間差処理
+      for (i = 9; i > 0; i--) { //ボーナス間履歴処理
+        bgames_history[i] = bgames_history[i - 1];
+        btype_history[i] = btype_history[i - 1];
+      }
+      bgames_history[0] = bgames;
+      btype_history[0] = (bonus_flag == 1) ? '<span style="color: red;">B</span>' : '<span style="color: green;">R</span>';
+      bonus_flag = 0;
+      bonus_counter = 0;
+      bgames = 0; //ボーナス間ゲーム数リセット
+      clearInterval(p_timerId);
+      document.getElementById('panel_big').style.opacity = 0; //赤パネル終了
+      document.getElementById('panel_regular').style.opacity = 0; //緑パネル終了
+      counter_run = 0; //カウンター動作フラグ終了
+      document.getElementById('bet').src = 'beta.gif'; //BETボタン点灯
+    }
+
+    function atari_light(num) { //当たりライト用
+      var opac = Math.floor(a_light[num] / 10) * 0.8;
+      document.getElementById('img_light' + num).style.opacity = opac;
+      a_light[num] = (a_light[num] > 0) ? a_light[num] - 1 : 19;
+    }
+
+    function bonus_music() {
+      try { //IEエラー回避処理用
+        audio[1].currentTime = 0;
+      } catch (e) {
+      }
+      if (audio_status == 1) {
+        audio[1].play(); //BGM演奏
+      }
+      audio[1].loop = true;
+    }
+
+    function setteiHenko() { //設定変更
+      var radio_check = document.getElementsByName('settei'); //配列に入れる
+      for (i = 0; i < radio_check.length; i++) {
+        if (radio_check[i].checked) {
+          settei = radio_check[i].value;
+        }
+      }
+    }
+
+    function waitHenko() { //ウエイト変更
+      var radio_check = document.getElementsByName('wait'); //配列に入れる
+      for (i = 0; i < radio_check.length; i++) {
+        if (radio_check[i].checked) {
+          wait_on = radio_check[i].value;
+        }
+      }
+    }
+
+    function flagHenko() { //フラグ表示変更
+      var radio_check = document.getElementsByName('flag'); //配列に入れる
+      if (radio_check[1].checked) {
+        document.getElementById('div_flag').style.left = 0 + 'px';
+      } else {
+        document.getElementById('div_flag').style.left = -600 + 'px';
+      }
+    }
+
+    function soundHenko() { //サウンド有無変更
+      var radio_check = document.getElementsByName('sound'); //配列に入れる
+      if (radio_check[1].checked) {
+        audio_status = 1;
+        for (i = 0; i < audio_files.length; i++) {
+          audio[i].muted = false;
+        }
+        if (bonus_flag == 1) {
+          audio[1].play();
+        } else if (bonus_flag == 2) {
+          audio[2].play();
+        }
+      } else {
+        audio_status = 0;
+        for (i = 0; i < audio_files.length; i++) {
+          audio[i].muted = true;
+        }
+        for (i = 0; i <= 3; i++) {
+          audio[i].pause();
+        }
+      }
+    }
+    function i_open() { //情報＆設定パネル開く
+      if ((window.TouchEvent) && (window.innerHeight > window.innerWidth)) {
+        document.getElementById('div_info').style.left = 50 + 'px';
+        document.getElementById('div_close').style.left = 480 + 'px'
+      } else {
+        document.getElementById('div_info').style.left = 540 + 'px';
+        document.getElementById('div_close').style.left = 970 + 'px';
+      }
+    }
+
+    function i_close() { //情報＆設定パネル閉じる
+      document.getElementById('div_info').style.left = -600 + 'px';
+      document.getElementById('div_close').style.left = -600 + 'px';
+    }
+
+    //キー入力判定
+    function keydown(e) {
+      switch (e.keyCode) {
+        case 32: //スペースキー(マルチ処理)
+          multiprocess();
+          break;
+        case 90: //Z-レバー
+          lever();
+          break;
+        case 88: //Z-左ボタン
+          button0();
+          break;
+        case 67: //C-中ボタン
+          button1();
+          break;
+        case 86: //V-右ボタン
+          button2();
+          break;
+        case 66: //B-BETボタン
+          bet();
+          break;
+      }
+    }
+
+    //キー離す判定
+    function keyup(e) {
+      switch (e.keyCode) {
+        case 32: //スペースキー(マルチ処理)
+          multiprocessup();
+          break;
+        case 90: //Z-レバー
+          leverup();
+          break;
+        case 88: //X-左ボタン
+          button0up();
+          break;
+        case 67: //C-中ボタン
+          button1up();
+          break;
+        case 86: //V-右ボタン
+          button2up();
+          break;
+        case 66: //B-BETボタン
+          betup();
+          break;
+      }
+    }
+
+    window.addEventListener('keydown', keydown); //キー入力イベント
+    window.addEventListener('keyup', keyup); //キー離すイベント
+
+    //スマホ、タブレットの場合にはデフォルトでサウンドオフ
+    if ((window.TouchEvent) && (window.innerHeight > window.innerWidth)) {
+      var radio_check = document.getElementsByName('sound'); //配列に入れる
+      radio_check[0].checked = true;
+      audio_status = 0;
+      for (i = 0; i < audio_files.length; i++) {
+        audio[i].muted = true;
+      }
+      for (i = 0; i <= 3; i++) {
+        audio[i].pause();
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

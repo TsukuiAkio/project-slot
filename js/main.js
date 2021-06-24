@@ -1,31 +1,37 @@
 'use strict';
 
+/*   変数初期設定
+======================================== */
 let canvas; //描画キャンバス
 let ctx; //描画コンテキスト
 
-/*   変数初期設定
-======================================== */
 let gameStatus = 0; //状態管理 0-読み込み中画面 1-読み込み完了画面 2-ゲーム終了画面
 let gameCredit = 50; //クレジットコイン数
 let gameSetting = 1; //設定
-let gameSettingAr = [];
+let gameSettingData = [];
+
 let reelImageA = [];
 let reelImageB = [];
 let reel = [];
 let reelSpeed = 20;
 let reelFreq = 13; //
 let reelMove = 0; //動作リール数
+
 let audioStatus = 1; //音声 0-OFF 1-ON
 let audio = [];
 let audioFiles = [];
+
 let bonusFlag = 0; //BonusFlag 1-BIG 2-REG
 let bonusCount = 0; //BonusCounter 
 let bonusCountBig = 0;
 let bonusCountReg = 0;
 let bonusHistory = []; //ボーナス履歴
+
 let flagData = []; //フラグデータ
 
-{ // 全体の音量調整
+/*   全体の音量調整
+======================================== */
+{
   for (i = 0; i < audioFiles.length; i++) {
     audio[i] = new Audio(audioFiles[i]);
     audio[i].volume = 1;
@@ -35,7 +41,9 @@ let flagData = []; //フラグデータ
   audio[3].volume = 0.7; //BIG-終了時BGMを小さく調整
 }
 
-{ // フラグ管理
+/*   フラグデータ管理
+======================================== */
+{
   flagData[0] = {
     name: 'リプレイ', //役名
     hit: 1, //役番号
@@ -126,15 +134,34 @@ let flagData = []; //フラグデータ
   }
 }
 
-
-
-{ // ゲーム状態管理
-
-}
-{ // リール制御
-
-}
-
-{ // 音声データ操作
-
+/*   各種設定データ
+======================================== */
+{
+  gameSettingData[1] = { //設定1
+    r: [13698, 29106, 29197, 29288, 32266, 32266, 32613, 32832]
+  }
+  gameSettingData[2] = { //設定2
+    r: [13698, 29106, 29197, 29288, 32266, 32266, 32620, 32845]
+  }
+  gameSettingData[3] = { //設定3
+    r: [13698, 29106, 29197, 29288, 32284, 32284, 32638, 32924]
+  }
+  gameSettingData[4] = { //設定4
+    r: [13698, 29106, 29197, 29288, 32297, 32297, 32663, 32974]
+  }
+  gameSettingData[5] = { //設定5
+    r: [13698, 29106, 29197, 29288, 32315, 32315, 32681, 33053]
+  }
+  gameSettingData[6] = { //設定6
+    r: [13698, 29879, 29970, 30061, 33088, 33088, 33460, 33832]
+  }
+  gameSettingData[10] = { //爆裂(テスト用)
+    r: [13698, 29879, 29970, 30061, 33088, 33088, 36421, 39754]
+  }
+  gameSettingData[100] = { //ビッグボーナス中
+    r: [0, 97087, 97170, 97253, 100000, 100000, 100000, 100000]
+  }
+  gameSettingData[200] = { //レギュラーボーナス中
+    r: [0, 0, 0, 0, 0, 100000, 100000, 100000]
+  }
 }

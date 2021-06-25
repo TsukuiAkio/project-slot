@@ -4,6 +4,7 @@
 ======================================== */
 let canvas; //描画キャンバス
 let ctx; //描画コンテキスト
+let canvasImage; //描画キャンバス背景
 
 let gameStatus = 0; //状態管理 0-読み込み中画面 1-読み込み完了画面 2-ゲーム終了画面
 let gameCredit = 50; //クレジットコイン数
@@ -28,6 +29,21 @@ let bonusCountReg = 0;
 let bonusHistory = []; //ボーナス履歴
 
 let flagData = []; //フラグデータ
+
+/*   描画キャンバスの設定
+======================================== */
+canvas = document.getElementById('canvas');
+ctx = canvas.getContext('2d');
+ctx.strokeStyle = '#eee';
+ctx.fillStyle = '#eee';
+ctx.lineWidth = 1;
+ctx.lineCap = 'butt';
+ctx.fillRect(0, 0, 800, 539);
+canvasImage = new Image();　//canvas背景画像の設定
+// canvasImage.src = '../images/canvas-background.jpg';
+canvasImage.onload = function () {
+  ctx.drawImage(canvasImage, 0, 0, 800, 540, 0, 0, 500,320);
+}
 
 /*   全体の音量調整
 ======================================== */

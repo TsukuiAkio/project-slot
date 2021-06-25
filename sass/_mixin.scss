@@ -56,3 +56,13 @@
     @content;
   }
 }
+
+// スマートフォン等ではホバーアニメーションで多重タップが起こるため
+// 769px以上のみでホバーアニメーションをつける
+@mixin hover {
+  @media only screen and (min-width: 769px) {
+    &:hover {
+      @content;
+    }
+  }
+}

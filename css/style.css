@@ -45,6 +45,106 @@ a {
 
 /*        全体レイアウト
 ======================================== */
+#header {
+  width: 100%;
+  height: 60px;
+  background: #333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+#header .main_width {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#header .hd_logo {
+  width: auto;
+  height: 60px;
+}
+
+#header .hd_logo img {
+  width: auto;
+  height: 100%;
+}
+
+#header .hd_link_wrap {
+  height: 100%;
+}
+
+#header .link_btn {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+#header .link_btn a {
+  display: block;
+  background: #efefef;
+  color: #333;
+  width: 180px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50vh;
+}
+
+@media only screen and (min-width: 769px) {
+  #header .link_btn a:hover {
+    opacity: .8;
+  }
+}
+
+.sidebar {
+  width: 320px;
+  height: 100vh;
+  background: #efefef;
+  -webkit-box-shadow: 0 0 10px rgba(51, 51, 51, 0.8);
+          box-shadow: 0 0 10px rgba(51, 51, 51, 0.8);
+  z-index: 1;
+  padding: 20px;
+  padding-top: 80px;
+  color: #555;
+}
+
+.sidebar h2 {
+  font-size: 18px;
+}
+
+.sidebar p {
+  font-size: 14px;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#canvas {
+  width: 1000px;
+  height: 800px;
+  margin: 0 auto;
+  display: block;
+}
+
 /*   全体レイアウト
 ======================================== */
 /*   描画キャンバス

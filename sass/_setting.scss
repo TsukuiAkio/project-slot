@@ -3,3 +3,78 @@
 
 /*        全体レイアウト
 ======================================== */
+#header {
+  width: 100%;
+  height: 60px;
+  background: #333;
+  position: fixed;
+  top:0; left: 0; right: 0;
+  z-index: 100;
+  .main_width {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hd_logo {
+    width: auto;
+    height: 60px;
+    img {
+      width: auto;
+      height: 100%;
+    }
+  }
+  .hd_link_wrap {
+    height: 100%;
+  }
+  .link_btn {
+    display: inline-block;
+    margin-right: 10px;
+    a  {
+      display: block;
+      background: #efefef;
+      color: #333;
+      width: 180px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 50vh;
+      @include hover {
+        opacity: .8;
+      }
+    }
+  }
+}
+
+.sidebar {
+  width: 320px;
+  height: 100vh;
+  background: #efefef;
+  // border-right: 1px solid #333;
+  box-shadow: 0 0 10px rgba(#333, .8);
+  z-index: 1;
+  padding: 20px;
+  padding-top: 80px;
+  color: #555;
+  h2 {
+    font-size: 18px;
+  }
+  p {
+    font-size: 14px;
+  }
+}
+
+
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative; 
+  display: flex;
+}
+
+#canvas {
+  width: 1000px;
+  height: 800px;
+  margin: 0 auto;
+  display: block;
+}
